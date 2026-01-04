@@ -402,12 +402,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --------------------------------------------------------------------------
-   Animación de tarjetas al scroll - Pinterest Style Layout
+   Animación de tarjetas al scroll - Collage Layout
    Intersection Observer con fade in + translateY
    -------------------------------------------------------------------------- */
 
 document.addEventListener('DOMContentLoaded', () => {
-	const items = document.querySelectorAll('.project-card');
+	const items = document.querySelectorAll('.img-item');
 	
 	const observer = new IntersectionObserver(entries => {
 		entries.forEach(entry => {
@@ -422,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================================================
-// PROJECT CARDS
+// IMAGE ITEMS
 // ==========================================================================
 
-const cards = document.querySelectorAll('.project-card');
+const items = document.querySelectorAll('.img-item');
