@@ -143,6 +143,9 @@
 	overflow: hidden;
 	border-radius: 4px;
 	transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+	user-select: none;
+	-webkit-user-select: none;
+	pointer-events: auto;
 }
 
 .hero-img img {
@@ -156,9 +159,9 @@
 .img-a {
 	top: 8%;
 	left: 3%;
-	width: 24vw;
-	max-width: 420px;
-	height: 32vh;
+	width: 32vw;
+	max-width: 520px;
+	height: 42vh;
 	z-index: 1;
 	transform: rotate(-3deg);
 }
@@ -189,20 +192,31 @@
 .img-e {
 	top: 10%;
 	left: 50%;
-	transform: translateX(-50%) rotate(-2deg);
-	width: 20vw;
-	max-width: 300px;
-	height: 28vh;
+	transform: translateX(-50%) rotate(4deg);
+	width: 28vw;
+	max-width: 420px;
+	height: 36vh;
 	z-index: 2;
+}
+
+/* Imagen F: Entre C y E (z-index: 2) */
+.img-f {
+	top: 12%;
+	right: 25%;
+	width: 18vw;
+	max-width: 280px;
+	height: 26vh;
+	z-index: 2;
+	transform: rotate(-1deg);
 }
 
 /* Imagen D: Centro derecha (z-index: 4) */
 .img-d {
 	top: 50%;
 	right: 8%;
-	width: 18vw;
-	max-width: 260px;
-	height: 22vh;
+	width: 24vw;
+	max-width: 340px;
+	height: 30vh;
 	z-index: 4;
 	transform: rotate(-8deg);
 }
@@ -225,7 +239,11 @@
 }
 
 .img-e:hover {
-	transform: translateX(-50%) scale(1.05) rotate(-2deg);
+	transform: translateX(-50%) scale(1.05) rotate(4deg);
+}
+
+.img-f:hover {
+	transform: scale(1.05) rotate(-1deg);
 }
 
 .img-d:hover {

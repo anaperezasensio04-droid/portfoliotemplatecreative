@@ -426,3 +426,74 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================================================
 
 const items = document.querySelectorAll('.img-item');
+
+// ==========================================================================
+// DRAG AND DROP PARA IMÁGENES HERO
+// ==========================================================================
+
+/**
+ * Sistema drag and drop mejorado para mover imágenes hero por la pantalla
+ */
+function initDragAndDrop() {
+	const heroImages = document.querySelectorAll('.hero-img');
+	console.log('Hero images encontradas:', heroImages.length); // Debug
+	
+	let draggedElement = null;
+	let offsetX = 0;
+	let offsetY = 0;
+
+	function handleMouseDown(e) {
+		console.log('Mouse down en:', this.className); // Debug
+		draggedElement = this;
+		this.style.cursor = 'grabbing';
+		this.style.zIndex = '1000';
+
+		const rect = this.getBoundingClientRect();
+		offsetX = e.clientX - rect.left;
+		offsetY = e.clientY - rect.top;
+
+		e.preventDefault();
+		e.stopPropagation();
+	}
+
+	function handleMouseMove(e) {
+		if (draggedElement) {
+			const x = e.clientX - offsetX;
+			const y = e.clientY - offsetY;
+
+			draggedElement.style.position = 'fixed';
+			draggedElement.style.left = x + 'px';
+			draggedElement.style.top = y + 'px';
+			draggedElement.style.right = 'auto';
+			draggedElement.style.bottom = 'auto';
+		}
+	}
+
+	function handleMouseUp(e) {
+		if (draggedElement) {
+			console.log('Mouse up'); // Debug
+			draggedElement.style.cursor = 'grab';
+			draggedElement = null;
+		}
+	}
+
+	// Añadir event listeners a cada imagen
+	heroImages.forEach((img) => {
+		img.style.cursor = 'grab';
+		img.addEventListener('mousedown', handleMouseDown);
+		console.log('Listener añadido a:', img.className); // Debug
+	});
+
+	// Event listeners globales
+	document.addEventListener('mousemove', handleMouseMove);
+	document.addEventListener('mouseup', handleMouseUp);
+	
+	console.log('Drag and drop inicializado'); // Debug
+}
+
+// Inicializar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', initDragAndDrop);
+} else {
+	initDragAndDrop();
+}
