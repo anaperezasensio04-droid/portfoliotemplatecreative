@@ -290,7 +290,7 @@
    1. Parent has [data-reveal-stagger] attribute
    2. All children start invisible (opacity: 0, translateY)
    3. When parent gets .revealed class, children animate with increasing delays
-   4. transition-delay creates the stagger: 0.1s, 0.2s, 0.3s, etc.
+   4. transition-delay creates the stagger: 0.1s, 0.2s, 0.3s, 0.4s, etc.
 
    💡 DATA ATTRIBUTES:
    We use data-* attributes instead of classes because:
@@ -406,4 +406,59 @@
 		flex-direction: column;
 		gap: var(--space-md);
 	}
+}
+
+/* --------------------------------------------------------------------------
+   14. Fuentes personalizadas
+   -------------------------------------------------------------------------- */
+@font-face {
+    font-family: "BBH Sans Bartle";
+    src: url('../fonts/BBHSansBartle-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   15. Marquee Bar (Loop continuo sin cortes - Rápido y sin espacios)
+   -------------------------------------------------------------------------- */
+.marquee-bar {
+    width: 100%;
+    overflow: hidden;
+    background: var(--color-accent);
+    padding: 30px 0;
+    position: relative;
+}
+
+.marquee-container {
+    display: flex;
+    gap: 0;
+    animation: marquee-scroll 12s linear infinite;
+    will-change: transform;
+}
+
+.marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+    color: #fff;
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    font-family: "BBH Sans Bartle", sans-serif;
+    font-weight: 400;
+    flex-shrink: 0;
+    padding: 0 1rem;
+}
+
+@keyframes marquee-scroll {
+    0% { 
+        transform: translateX(0);
+    }
+    100% { 
+        transform: translateX(-50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-container {
+        animation: none;
+    }
 }
