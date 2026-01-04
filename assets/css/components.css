@@ -88,101 +88,139 @@
 }
 
 /* --------------------------------------------------------------------------
-   8. Projects Section - Glassmorphism Grid con Animación al Scroll
+   8. Projects Section
    -------------------------------------------------------------------------- */
-.projects-grid {
-    display: grid;
-    gap: var(--space-lg);
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-@media (min-width: 640px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 1024px) {
-    .projects-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.projects {
+	position: relative;
+	height: 250vh;
+	padding: 8rem 4rem 4rem 4rem;
 }
 
 .project-card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    padding: var(--space-lg);
-    opacity: 0;
-    transform: translateY(30px);
+	position: absolute;
+	cursor: pointer;
+	transition: transform 0.4s ease;
+	z-index: 1;
 }
 
-/* Animación al entrar en viewport */
-.project-card.reveal {
-    opacity: 1;
-    transform: translateY(0);
+.project-card:hover {
+	transform: scale(1.03);
+	z-index: 10;
 }
 
-.project-image {
-    aspect-ratio: 4/3;
-    overflow: hidden;
-    border-radius: 12px;
-    margin-bottom: var(--space-md);
+.project-card img {
+	width: 100%;
+	display: block;
 }
 
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+/* POSICIONES INDIVIDUALES PARA CADA TARJETA */
+/* Tarjeta 1 (Proyecto Uno - large) */
+.project-card:nth-child(2) {
+	width: 25%;
+	top: 5%;
+	left: 5%;
 }
 
-.project-card:hover .project-image img {
-    transform: scale(1.08);
+/* Tarjeta 2 (Proyecto Dos - small) */
+.project-card:nth-child(3) {
+	width: 15%;
+	top: 10%;
+	left: 68%;
 }
 
-.project-content {
-    padding: 0;
+/* Tarjeta 3 (Proyecto Tres - medium) */
+.project-card:nth-child(4) {
+	width: 20%;
+	top: 18%;
+	left: 42%;
 }
 
-.project-content h3 {
-    font-family: "BBH Sans Bartle", sans-serif !important;
-    font-weight: 400 !important;
-    font-size: var(--text-lg);
-    margin-bottom: var(--space-sm);
-    color: var(--color-text);
+/* Tarjeta 4 (Proyecto Cuatro - small) */
+.project-card:nth-child(5) {
+	width: 16%;
+	top: 24%;
+	left: 5%;
 }
 
-.project-content p {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-md);
-    line-height: 1.6;
+/* Tarjeta 5 (Proyecto Cinco - medium) */
+.project-card:nth-child(6) {
+	width: 22%;
+	top: 34%;
+	left: 65%;
 }
 
-.project-tags {
-    display: flex;
-    gap: var(--space-xs);
-    flex-wrap: wrap;
+/* Tarjeta 6 (Proyecto Seis - large) */
+.project-card:nth-child(7) {
+	width: 28%;
+	top: 47%;
+	left: 12%;
 }
 
-.project-tags span {
-    font-size: var(--text-xs);
-    padding: 6px 12px;
-    background: rgba(83, 100, 255, 0.15);
-    border: 1px solid rgba(83, 100, 255, 0.3);
-    border-radius: 20px;
-    color: var(--color-accent);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s;
+/* Tarjeta 7 (Proyecto Siete - small) */
+.project-card:nth-child(8) {
+	width: 15%;
+	top: 45%;
+	left: 75%;
 }
 
-.project-card:hover .project-tags span {
-    background: rgba(83, 100, 255, 0.15);
-    border-color: rgba(83, 100, 255, 0.3);
+/* Tarjeta 8 (Proyecto Ocho - medium) */
+.project-card:nth-child(9) {
+	width: 21%;
+	top: 60%;
+	left: 50%;
+}
+
+/* MODAL */
+.modal {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.6);
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.modal.active {
+	display: flex;
+}
+
+.modal-content {
+	background: white;
+	padding: 2rem;
+	max-width: 500px;
+	animation: fadeIn 0.3s ease;
+	border-radius: 8px;
+}
+
+.close {
+	background: none;
+	border: none;
+	font-size: 1.2rem;
+	cursor: pointer;
+	float: right;
+	margin-bottom: 1rem;
+}
+
+#modal-title {
+	margin-top: 0;
+	color: var(--color-text);
+}
+
+#modal-desc {
+	color: var(--color-text-muted);
+	line-height: 1.6;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 /* --------------------------------------------------------------------------
@@ -191,6 +229,7 @@
 .contact {
 	background: var(--color-bg-alt);
 	text-align: center;
+	margin-top: 100vh;
 }
 
 .contact-content p {
@@ -475,191 +514,5 @@
     }
 }
 
-/* --------------------------------------------------------------------------
-   15. Featured Projects Section
-   -------------------------------------------------------------------------- */
-#projects {
-    padding: var(--space-xl) 0;
-    background: var(--color-bg-alt);
-}
 
-.section-title {
-    font-size: var(--text-4xl);
-    margin-bottom: var(--space-lg);
-    text-align: center;
-    color: var(--color-text);
-}
-
-.project-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s, background 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out, border 0.3s ease-in-out;
-    padding: var(--space-md);
-    opacity: 1; /* Por defecto visible para no afectar otras tarjetas */
-}
-
-/* Revelación progresiva con stagger effect */
-.project-card.reveal-on-scroll {
-    opacity: 0; /* Inicia invisible */
-    transform: translateY(30px); /* Desplazado hacia abajo */
-    animation: revealCard 0.6s ease-out forwards;
-    animation-play-state: paused; /* Se inicia con paused, se activa con JS */
-}
-
-/* Retrasos escalonados para efecto stagger */
-.project-card.reveal-on-scroll:nth-child(1) { animation-delay: 0s; }
-.project-card.reveal-on-scroll:nth-child(2) { animation-delay: 0.1s; }
-.project-card.reveal-on-scroll:nth-child(3) { animation-delay: 0.2s; }
-.project-card.reveal-on-scroll:nth-child(4) { animation-delay: 0.3s; }
-.project-card.reveal-on-scroll:nth-child(5) { animation-delay: 0.4s; }
-.project-card.reveal-on-scroll:nth-child(6) { animation-delay: 0.5s; }
-
-@keyframes revealCard {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.project-card.reveal {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.project-card:hover {
-    transform: translateY(-8px);
-    background: #FF69B4;
-    backdrop-filter: none;
-    border-color: #FF69B4;
-}
-
-.project-image {
-    aspect-ratio: 16/9;
-    overflow: hidden;
-    border-radius: 12px;
-    margin-bottom: var(--space-md);
-}
-
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s;
-}
-
-.project-card:hover .project-image img {
-    transform: scale(1.05);
-}
-
-.project-content {
-    padding: 0;
-}
-
-.project-content h3 {
-    font-family: "BBH Sans Bartle", sans-serif !important;
-    font-weight: 500 !important;
-    font-size: var(--text-lg);
-    margin-bottom: var(--space-sm);
-    color: var(--color-text);
-}
-
-.project-content p {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-md);
-    line-height: 1.6;
-}
-
-.project-tags {
-    display: flex;
-    gap: var(--space-xs);
-    flex-wrap: wrap;
-}
-
-.project-tags span {
-    font-size: var(--text-xs);
-    padding: 6px 12px;
-    background: rgba(255, 105, 180, 0.15);
-    border: 1px solid rgba(255, 105, 180, 0.3);
-    border-radius: 20px;
-    color: #FF69B4;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s;
-}
-
-.project-card:hover .project-tags span {
-    background: rgba(255, 105, 180, 0.25);
-    border-color: rgba(255, 105, 180, 0.5);
-}
-
-/* --------------------------------------------------------------------------
-   16. Animaciones de entrada para la sección de proyectos destacados
-   -------------------------------------------------------------------------- */
-[data-reveal-stagger] > .project-card {
-	opacity: 0;
-	transform: translateY(20px);
-	transition: opacity 0.6s var(--ease-out),
-	            transform 0.6s var(--ease-out;
-}
-
-[data-reveal-stagger].revealed > .project-card {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-/* --------------------------------------------------------------------------
-   17. Ajustes específicos para la sección de proyectos destacados
-   -------------------------------------------------------------------------- */
-#projects .projects-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-}
-
-@media (min-width: 640px) {
-    #projects .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 1024px) {
-    #projects .projects-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-.project-card {
-    padding: var(--space-md);
-}
-
-.project-content h3 {
-    font-size: var(--text-md);
-}
-
-.project-content p {
-    font-size: var(--text-xs);
-}
-
-.project-tags span {
-    font-size: var(--text-xxs);
-    padding: 4px 8px;
-}
-
-/* --------------------------------------------------------------------------
-   18. Mobile adjustments for Featured Projects Section
-   -------------------------------------------------------------------------- */
-@media (max-width: 640px) {
-	#projects .projects-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.project-card {
-		margin-bottom: var(--space-md);
-	}
-}
 

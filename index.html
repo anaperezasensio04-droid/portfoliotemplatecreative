@@ -100,89 +100,49 @@
         </div>
 
 		<!-- Projects Section -->
-		<section id="projects" class="section projects">
-			<div class="container">
-				<h2 class="section-title animate-on-scroll">Projects</h2>
-				<!-- Copilot:
-				Crea una sección con un grid de 6 tarjetas similar a un diseño editorial moderno.
-				Requisitos:
-				- El grid debe contener 6 tarjetas.
-				- Las tarjetas deben revelarse progresivamente al hacer scroll, como en una web premium.
-				- Cada tarjeta debe aparecer cuando entra en el viewport.
-				- Usa una animación suave tipo fade-in + translateY.
-				- Las tarjetas deben aparecer con un pequeño retraso entre ellas (stagger effect).
-				- Usa Intersection Observer para detectar el scroll.
-				- El diseño debe ser limpio, elegante y minimalista.
-				- Las tarjetas deben mantener su posición fija en el grid (no moverse de sitio).
-				- Debe funcionar correctamente en navegadores modernos.
-				- Usa HTML, CSS y JavaScript puro.
-				-->
-				<div class="projects-grid" data-reveal-stagger>
-					<article class="project-card reveal-on-scroll">
-						<div class="project-image">
-							<img src="https://picsum.photos/400/300?random=1" alt="E-commerce Platform" loading="lazy" />
-						</div>
-						<div class="project-content">
-							<h3>E-commerce Platform</h3>
-							<p>A fully responsive online store with cart functionality and payment integration.</p>
-							<div class="project-tags">
-	
-							</div>
-						</div>
-					</article>
-					<article class="project-card reveal-on-scroll">
-						<div class="project-image">
-							<img src="https://picsum.photos/400/300?random=2" alt="Dashboard UI" loading="lazy" />
-						</div>
-						<div class="project-content">
-							<h3>Analytics Dashboard</h3>
-							<p>Real-time data visualization dashboard with dark mode support.</p>
-							
-						</div>
-					</article>
-					<article class="project-card reveal-on-scroll">
-						<div class="project-image">
-							<img src="https://picsum.photos/400/300?random=3" alt="Mobile App Landing" loading="lazy" />
-						</div>
-						<div class="project-content">
-							<h3>App Landing Page</h3>
-							<p>Conversion-optimized landing page with scroll animations.</p>
-							
-						</div>
-					</article>
-					<article class="project-card reveal-on-scroll">
-						<div class="project-image">
-							<img src="https://picsum.photos/400/300?random=4" alt="Social Media App" loading="lazy" />
-						</div>
-						<div class="project-content">
-							<h3>Social Media App</h3>
-							<p>Real-time chat application with elegant UI and smooth interactions.</p>
-							
-						</div>
-					</article>
-					<article class="project-card reveal-on-scroll">
-						<div class="project-image">
-							<img src="https://picsum.photos/400/300?random=5" alt="Portfolio Website" loading="lazy" />
-						</div>
-						<div class="project-content">
-							<h3>Portfolio Website</h3>
-							<p>Minimalist portfolio showcasing creative work with parallax scrolling effects.</p>
-							
-						</div>
-					</article>
-					<article class="project-card reveal-on-scroll">
-						<div class="project-image">
-							<img src="https://picsum.photos/400/300?random=6" alt="Wellness Tracker" loading="lazy" />
-						</div>
-						<div class="project-content">
-							<h3>Wellness Tracker</h3>
-							<p>Health and fitness tracking application with data visualization and progress tracking.</p>
-							
-						</div>
-					</article>
-				</div>
+		<section id="projects" class="projects">
+			<h2 class="section-title animate-on-scroll">Projects</h2>
+			<div class="project-card large" data-title="Proyecto Uno" data-desc="Descripción del proyecto uno">
+				<img src="https://picsum.photos/500/600" alt="Proyecto Uno" />
+			</div>
+
+			<div class="project-card small" data-title="Proyecto Dos" data-desc="Descripción del proyecto dos">
+				<img src="https://picsum.photos/400/300" alt="Proyecto Dos" />
+			</div>
+
+			<div class="project-card medium" data-title="Proyecto Tres" data-desc="Descripción del proyecto tres">
+				<img src="https://picsum.photos/450/500" alt="Proyecto Tres" />
+			</div>
+
+			<div class="project-card small" data-title="Proyecto Cuatro" data-desc="Descripción del proyecto cuatro">
+				<img src="https://picsum.photos/350/400" alt="Proyecto Cuatro" />
+			</div>
+
+			<div class="project-card medium" data-title="Proyecto Cinco" data-desc="Descripción del proyecto cinco">
+				<img src="https://picsum.photos/480/520" alt="Proyecto Cinco" />
+			</div>
+
+			<div class="project-card large" data-title="Proyecto Seis" data-desc="Descripción del proyecto seis">
+				<img src="https://picsum.photos/520/650" alt="Proyecto Seis" />
+			</div>
+
+			<div class="project-card small" data-title="Proyecto Siete" data-desc="Descripción del proyecto siete">
+				<img src="https://picsum.photos/380/350" alt="Proyecto Siete" />
+			</div>
+
+			<div class="project-card medium" data-title="Proyecto Ocho" data-desc="Descripción del proyecto ocho">
+				<img src="https://picsum.photos/460/510" alt="Proyecto Ocho" />
 			</div>
 		</section>
+
+		<!-- MODAL -->
+		<div class="modal" id="modal">
+			<div class="modal-content">
+				<button class="close">✕</button>
+				<h2 id="modal-title"></h2>
+				<p id="modal-desc"></p>
+			</div>
+		</div>
 
 		<!-- Contact Section -->
 		<section id="contact" class="section contact">

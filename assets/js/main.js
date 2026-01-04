@@ -455,3 +455,28 @@ document.addEventListener('DOMContentLoaded', () => {
  *
  * For traditional multi-page sites, this isn't needed (page reload cleans up).
  */
+// ==========================================================================
+// PROJECT CARDS AND MODAL
+// ==========================================================================
+
+const cards = document.querySelectorAll('.project-card');
+const modal = document.getElementById('modal');
+const title = document.getElementById('modal-title');
+const desc = document.getElementById('modal-desc');
+const closeBtn = document.querySelector('.close');
+
+cards.forEach(card => {
+	card.addEventListener('click', () => {
+		title.textContent = card.dataset.title;
+		desc.textContent = card.dataset.desc;
+		modal.classList.add('active');
+	});
+});
+
+closeBtn.addEventListener('click', () => {
+	modal.classList.remove('active');
+});
+
+modal.addEventListener('click', e => {
+	if (e.target === modal) modal.classList.remove('active');
+});
