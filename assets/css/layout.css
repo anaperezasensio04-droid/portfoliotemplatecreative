@@ -17,6 +17,27 @@
 	text-align: center;
 }
 
+
+/* --------------------------------------------------------------------------
+   5. Hero Section
+   -------------------------------------------------------------------------- */
+.hero {
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	overflow: hidden;
+}
+
+.hero-bg {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+	z-index: -1;
+}
+
 /* --------------------------------------------------------------------------
    CSS SCROLL-DRIVEN ANIMATIONS (MODERN PARALLAX)
 
