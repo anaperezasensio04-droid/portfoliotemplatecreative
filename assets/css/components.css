@@ -88,138 +88,89 @@
 }
 
 /* --------------------------------------------------------------------------
-   8. Projects Section
+   8. Projects Section - Pinterest Style Moodboard
    -------------------------------------------------------------------------- */
 .projects {
-	position: relative;
-	height: 250vh;
-	padding: 8rem 4rem 4rem 4rem;
+	padding: 6rem 2rem;
+	background: #0c0c0c;
+}
+
+.projects .section-title {
+	margin-bottom: 4rem;
+	text-align: center;
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	color: #ffffff;
+}
+
+.projects-grid {
+	column-count: 4;
+	column-gap: 2rem;
+	max-width: 1600px;
+	margin: 0 auto 4rem;
 }
 
 .project-card {
-	position: absolute;
-	cursor: pointer;
-	transition: transform 0.4s ease;
-	z-index: 1;
-}
-
-.project-card:hover {
-	transform: scale(1.03);
-	z-index: 10;
+	break-inside: avoid;
+	margin-bottom: 2rem;
+	overflow: hidden;
+	border-radius: 12px;
+	opacity: 0;
+	transform: translateY(40px);
+	transition: transform 0.4s ease, opacity 0.4s ease;
+	background: #0c0c0c;
+	
 }
 
 .project-card img {
 	width: 100%;
+	height: auto;
 	display: block;
+	transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* POSICIONES INDIVIDUALES PARA CADA TARJETA */
-/* Tarjeta 1 (Proyecto Uno - large) */
-.project-card:nth-child(2) {
-	width: 25%;
-	top: 5%;
-	left: 5%;
+.project-card:hover img {
+	transform: scale(1.06);
 }
 
-/* Tarjeta 2 (Proyecto Dos - small) */
-.project-card:nth-child(3) {
-	width: 15%;
-	top: 10%;
-	left: 68%;
+.project-card.in-view {
+	opacity: 1;
+	transform: translateY(0);
 }
 
-/* Tarjeta 3 (Proyecto Tres - medium) */
-.project-card:nth-child(4) {
-	width: 20%;
-	top: 18%;
-	left: 42%;
-}
-
-/* Tarjeta 4 (Proyecto Cuatro - small) */
-.project-card:nth-child(5) {
-	width: 16%;
-	top: 24%;
-	left: 5%;
-}
-
-/* Tarjeta 5 (Proyecto Cinco - medium) */
-.project-card:nth-child(6) {
-	width: 22%;
-	top: 34%;
-	left: 65%;
-}
-
-/* Tarjeta 6 (Proyecto Seis - large) */
-.project-card:nth-child(7) {
-	width: 28%;
-	top: 47%;
-	left: 12%;
-}
-
-/* Tarjeta 7 (Proyecto Siete - small) */
-.project-card:nth-child(8) {
-	width: 15%;
-	top: 45%;
-	left: 75%;
-}
-
-/* Tarjeta 8 (Proyecto Ocho - medium) */
-.project-card:nth-child(9) {
-	width: 21%;
-	top: 60%;
-	left: 50%;
-}
-
-/* MODAL */
-.modal {
-	position: fixed;
-	inset: 0;
-	background: rgba(0, 0, 0, 0.6);
-	display: none;
-	justify-content: center;
-	align-items: center;
-	z-index: 1000;
-}
-
-.modal.active {
-	display: flex;
-}
-
-.modal-content {
-	background: white;
-	padding: 2rem;
-	max-width: 500px;
-	animation: fadeIn 0.3s ease;
-	border-radius: 8px;
-}
-
-.close {
-	background: none;
-	border: none;
-	font-size: 1.2rem;
-	cursor: pointer;
-	float: right;
-	margin-bottom: 1rem;
-}
-
-#modal-title {
-	margin-top: 0;
-	color: var(--color-text);
-}
-
-#modal-desc {
-	color: var(--color-text-muted);
-	line-height: 1.6;
-}
-
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-		transform: translateY(20px);
+/* Responsive */
+@media (max-width: 1280px) {
+	.projects-grid {
+		column-count: 3;
+		column-gap: 1.5rem;
 	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
+}
+
+@media (max-width: 1024px) {
+	.projects-grid {
+		column-count: 3;
+		column-gap: 1.5rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.projects-grid {
+		column-count: 2;
+		column-gap: 1.2rem;
+	}
+
+	.project-card {
+		margin-bottom: 1.2rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.projects-grid {
+		column-count: 1;
+		column-gap: 1rem;
+	}
+
+	.project-card {
+		margin-bottom: 1rem;
 	}
 }
 

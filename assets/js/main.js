@@ -402,81 +402,27 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --------------------------------------------------------------------------
-   Animación de tarjetas al scroll (Intersection Observer)
-   Revelación progresiva con stagger effect
+   Animación de tarjetas al scroll - Pinterest Style Layout
+   Intersection Observer con fade in + translateY
    -------------------------------------------------------------------------- */
 
 document.addEventListener('DOMContentLoaded', () => {
-    const projectCards = document.querySelectorAll('.project-card.reveal-on-scroll');
-    
-    // Configuración del observador
-    const observerOptions = {
-        threshold: 0.1,              // Trigger cuando el 10% sea visible
-        rootMargin: '0px 0px -50px 0px'  // Trigger 50px antes de entrar al viewport
-    };
-    
-    // Crear observador con Intersection Observer API
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                // Dispara la animación CSS añadiendo la clase que ya tiene animation-delay
-                entry.target.style.animationPlayState = 'running';
-                
-                // Deja de observar después de que aparezca (optimización)
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    // Observar cada tarjeta
-    projectCards.forEach(card => {
-        // Inicialmente pausamos la animación
-        card.style.animationPlayState = 'paused';
-        observer.observe(card);
-    });
+	const items = document.querySelectorAll('.project-card');
+	
+	const observer = new IntersectionObserver(entries => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('in-view');
+				observer.unobserve(entry.target);
+			}
+		});
+	}, { threshold: 0.3 });
+	
+	items.forEach(item => observer.observe(item));
 });
 
 // ==========================================================================
-// 7. CLEANUP (FOR SPA ENVIRONMENTS)
-// ==========================================================================
-
-/**
- * Cleanup function for Single Page Application (SPA) routing.
- *
- * 🎓 WHY IS CLEANUP IMPORTANT?
- * In SPAs (React, Vue, etc.), pages don't fully reload when navigating.
- * If you don't disconnect observers, they keep watching elements that
- * may have been removed, causing memory leaks and bugs.
- *
- * 📐 WHEN TO CALL THIS:
- * - Before navigating away from this page in an SPA
- * - In React: useEffect cleanup function
- * - In Vue: onUnmounted lifecycle hook
- *
- * For traditional multi-page sites, this isn't needed (page reload cleans up).
- */
-// ==========================================================================
-// PROJECT CARDS AND MODAL
+// PROJECT CARDS
 // ==========================================================================
 
 const cards = document.querySelectorAll('.project-card');
-const modal = document.getElementById('modal');
-const title = document.getElementById('modal-title');
-const desc = document.getElementById('modal-desc');
-const closeBtn = document.querySelector('.close');
-
-cards.forEach(card => {
-	card.addEventListener('click', () => {
-		title.textContent = card.dataset.title;
-		desc.textContent = card.dataset.desc;
-		modal.classList.add('active');
-	});
-});
-
-closeBtn.addEventListener('click', () => {
-	modal.classList.remove('active');
-});
-
-modal.addEventListener('click', e => {
-	if (e.target === modal) modal.classList.remove('active');
-});
