@@ -401,6 +401,41 @@ document.addEventListener('DOMContentLoaded', () => {
 	console.log('🚀 Grade 1 Demo: Vanilla scroll animations initialized');
 });
 
+/* --------------------------------------------------------------------------
+   Animación de tarjetas al scroll (Intersection Observer)
+   Revelación progresiva con stagger effect
+   -------------------------------------------------------------------------- */
+
+document.addEventListener('DOMContentLoaded', () => {
+    const projectCards = document.querySelectorAll('.project-card.reveal-on-scroll');
+    
+    // Configuración del observador
+    const observerOptions = {
+        threshold: 0.1,              // Trigger cuando el 10% sea visible
+        rootMargin: '0px 0px -50px 0px'  // Trigger 50px antes de entrar al viewport
+    };
+    
+    // Crear observador con Intersection Observer API
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // Dispara la animación CSS añadiendo la clase que ya tiene animation-delay
+                entry.target.style.animationPlayState = 'running';
+                
+                // Deja de observar después de que aparezca (optimización)
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observar cada tarjeta
+    projectCards.forEach(card => {
+        // Inicialmente pausamos la animación
+        card.style.animationPlayState = 'paused';
+        observer.observe(card);
+    });
+});
+
 // ==========================================================================
 // 7. CLEANUP (FOR SPA ENVIRONMENTS)
 // ==========================================================================

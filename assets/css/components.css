@@ -61,6 +61,8 @@
 }
 
 .skill-card h3 {
+	font-family: "BBH Sans Bartle", sans-serif !important;
+	font-weight: 400 !important;
 	font-size: var(--text-sm);
 	margin-bottom: var(--space-sm);
 }
@@ -86,80 +88,101 @@
 }
 
 /* --------------------------------------------------------------------------
-   8. Projects Section
+   8. Projects Section - Glassmorphism Grid con Animación al Scroll
    -------------------------------------------------------------------------- */
 .projects-grid {
-	display: grid;
-	gap: var(--space-lg);
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 @media (min-width: 640px) {
-	.projects-grid {
-		grid-template-columns: repeat(2, 1fr);
-	}
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (min-width: 1024px) {
-	.projects-grid {
-		grid-template-columns: repeat(3, 1fr);
-	}
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .project-card {
-	background: var(--color-bg-alt);
-	border-radius: 16px;
-	overflow: hidden;
-	transition: transform 0.3s, box-shadow 0.3s;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: var(--space-lg);
+    opacity: 0;
+    transform: translateY(30px);
 }
 
-.project-card:hover {
-	transform: translateY(-8px);
-	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+/* Animación al entrar en viewport */
+.project-card.reveal {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .project-image {
-	aspect-ratio: 4/3;
-	overflow: hidden;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: var(--space-md);
 }
 
 .project-image img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	transition: transform 0.5s;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .project-card:hover .project-image img {
-	transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .project-content {
-	padding: var(--space-md);
+    padding: 0;
 }
 
 .project-content h3 {
-	font-size: var(--text-lg);
-	margin-bottom: var(--space-sm);
+    font-family: "BBH Sans Bartle", sans-serif !important;
+    font-weight: 400 !important;
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
 }
 
 .project-content p {
-	font-size: var(--text-sm);
-	color: var(--color-text-muted);
-	margin-bottom: var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
 }
 
 .project-tags {
-	display: flex;
-	gap: var(--space-xs);
-	flex-wrap: wrap;
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
 }
 
 .project-tags span {
-	font-size: var(--text-xs);
-	padding: 4px 8px;
-	background: var(--color-bg);
-	border-radius: 4px;
-	color: var(--color-accent);
+    font-size: var(--text-xs);
+    padding: 6px 12px;
+    background: rgba(83, 100, 255, 0.15);
+    border: 1px solid rgba(83, 100, 255, 0.3);
+    border-radius: 20px;
+    color: var(--color-accent);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+}
+
+.project-card:hover .project-tags span {
+    background: rgba(83, 100, 255, 0.15);
+    border-color: rgba(83, 100, 255, 0.3);
 }
 
 /* --------------------------------------------------------------------------
@@ -409,23 +432,12 @@
 }
 
 /* --------------------------------------------------------------------------
-   14. Fuentes personalizadas
-   -------------------------------------------------------------------------- */
-@font-face {
-    font-family: "BBH Sans Bartle";
-    src: url('../fonts/BBHSansBartle-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* --------------------------------------------------------------------------
-   15. Marquee Bar (Loop continuo sin cortes - Rápido y sin espacios)
+   14. Marquee Bar (Loop continuo sin cortes - Rápido y sin espacios)
    -------------------------------------------------------------------------- */
 .marquee-bar {
     width: 100%;
     overflow: hidden;
-    background: var(--color-accent);
+    background: #FF69B4;
     padding: 30px 0;
     position: relative;
 }
@@ -462,3 +474,192 @@
         animation: none;
     }
 }
+
+/* --------------------------------------------------------------------------
+   15. Featured Projects Section
+   -------------------------------------------------------------------------- */
+#projects {
+    padding: var(--space-xl) 0;
+    background: var(--color-bg-alt);
+}
+
+.section-title {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+    color: var(--color-text);
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out, border 0.3s ease-in-out;
+    padding: var(--space-md);
+    opacity: 1; /* Por defecto visible para no afectar otras tarjetas */
+}
+
+/* Revelación progresiva con stagger effect */
+.project-card.reveal-on-scroll {
+    opacity: 0; /* Inicia invisible */
+    transform: translateY(30px); /* Desplazado hacia abajo */
+    animation: revealCard 0.6s ease-out forwards;
+    animation-play-state: paused; /* Se inicia con paused, se activa con JS */
+}
+
+/* Retrasos escalonados para efecto stagger */
+.project-card.reveal-on-scroll:nth-child(1) { animation-delay: 0s; }
+.project-card.reveal-on-scroll:nth-child(2) { animation-delay: 0.1s; }
+.project-card.reveal-on-scroll:nth-child(3) { animation-delay: 0.2s; }
+.project-card.reveal-on-scroll:nth-child(4) { animation-delay: 0.3s; }
+.project-card.reveal-on-scroll:nth-child(5) { animation-delay: 0.4s; }
+.project-card.reveal-on-scroll:nth-child(6) { animation-delay: 0.5s; }
+
+@keyframes revealCard {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-card.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    background: #FF69B4;
+    backdrop-filter: none;
+    border-color: #FF69B4;
+}
+
+.project-image {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: var(--space-md);
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-content {
+    padding: 0;
+}
+
+.project-content h3 {
+    font-family: "BBH Sans Bartle", sans-serif !important;
+    font-weight: 500 !important;
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+}
+
+.project-content p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+}
+
+.project-tags {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+}
+
+.project-tags span {
+    font-size: var(--text-xs);
+    padding: 6px 12px;
+    background: rgba(255, 105, 180, 0.15);
+    border: 1px solid rgba(255, 105, 180, 0.3);
+    border-radius: 20px;
+    color: #FF69B4;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+}
+
+.project-card:hover .project-tags span {
+    background: rgba(255, 105, 180, 0.25);
+    border-color: rgba(255, 105, 180, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   16. Animaciones de entrada para la sección de proyectos destacados
+   -------------------------------------------------------------------------- */
+[data-reveal-stagger] > .project-card {
+	opacity: 0;
+	transform: translateY(20px);
+	transition: opacity 0.6s var(--ease-out),
+	            transform 0.6s var(--ease-out;
+}
+
+[data-reveal-stagger].revealed > .project-card {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   17. Ajustes específicos para la sección de proyectos destacados
+   -------------------------------------------------------------------------- */
+#projects .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+@media (min-width: 640px) {
+    #projects .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    #projects .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.project-card {
+    padding: var(--space-md);
+}
+
+.project-content h3 {
+    font-size: var(--text-md);
+}
+
+.project-content p {
+    font-size: var(--text-xs);
+}
+
+.project-tags span {
+    font-size: var(--text-xxs);
+    padding: 4px 8px;
+}
+
+/* --------------------------------------------------------------------------
+   18. Mobile adjustments for Featured Projects Section
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+	#projects .projects-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.project-card {
+		margin-bottom: var(--space-md);
+	}
+}
+
