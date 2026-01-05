@@ -148,14 +148,15 @@
 	pointer-events: auto;
 }
 
-.hero-img img {
+.hero-img img,
+.hero-img video {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	display: block;
 }
 
-/* Imagen A: Superior izquierda, detrás del texto (z-index: 1) */
+/* Imagen A: Superior izquierda con video (z-index: 1) */
 .img-a {
 	top: 8%;
 	left: 3%;
@@ -164,16 +165,23 @@
 	height: 42vh;
 	z-index: 1;
 	transform: rotate(-3deg);
+	background: #000;
 }
 
-/* Imagen B: Inferior central (z-index: 3) */
+.img-a video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Imagen B: Debajo del título PROJECTS (z-index: 1 - detrás del título) */
 .img-b {
-	bottom: 8%;
+	top: 50%;
 	left: 50%;
 	transform: translateX(-50%) rotate(2deg);
 	width: 33vw;
 	max-width: 400px;
-	height: 24vh;
+	height: 30vh;
 	z-index: 3;
 }
 
@@ -191,23 +199,30 @@
 /* Imagen E: Centro superior (z-index: 2) */
 .img-e {
 	top: 10%;
-	left: 50%;
+	left: 40%;
 	transform: translateX(-50%) rotate(4deg);
 	width: 28vw;
 	max-width: 420px;
-	height: 36vh;
+	height: 48vh;
 	z-index: 2;
 }
 
-/* Imagen F: Entre C y E (z-index: 2) */
+/* Imagen F: Video (z-index: 2) */
 .img-f {
 	top: 12%;
 	right: 25%;
-	width: 18vw;
-	max-width: 280px;
-	height: 26vh;
+	width: 32vw;
+	max-width: 480px;
+	height: 38vh;
 	z-index: 2;
 	transform: rotate(-1deg);
+	background: #000;
+}
+
+.img-f video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 /* Imagen D: Centro derecha (z-index: 4) */
@@ -219,6 +234,72 @@
 	height: 30vh;
 	z-index: 4;
 	transform: rotate(-8deg);
+}
+
+/* Imagen G: Centro izquierda (z-index: 1) */
+.img-g {
+	top: 45%;
+	left: 8%;
+	width: 26vw;
+	max-width: 380px;
+	height: 28vh;
+	z-index: 1;
+	transform: rotate(6deg);
+}
+
+/* Imagen H: Lateral derecha media (z-index: 2) */
+.img-h {
+	top: 35%;
+	right: 15%;
+	width: 18vw;
+	max-width: 270px;
+	height: 32vh;
+	z-index: 2;
+	transform: rotate(-4deg);
+}
+
+/* Imagen I: Centro (z-index: 3) */
+.img-i {
+	top: 55%;
+	left: 50%;
+	transform: translateX(-50%) rotate(3deg);
+	width: 30vw;
+	max-width: 440px;
+	height: 26vh;
+	z-index: 3;
+}
+
+/* Imagen J: Superior centro-izquierda (z-index: 2) */
+.img-j {
+	top: 20%;
+	left: 20%;
+	width: 24vw;
+	max-width: 340px;
+	height: 32vh;
+	z-index: 2;
+	transform: rotate(-5deg);
+}
+
+/* Imagen K: Inferior derecha (z-index: 1) */
+.img-k {
+	bottom: 15%;
+	right: 10%;
+	width: 22vw;
+	max-width: 320px;
+	height: 28vh;
+	z-index: 1;
+	transform: rotate(7deg);
+}
+
+/* Imagen L: Inferior izquierda (z-index: 2) */
+.img-l {
+	bottom: 12%;
+	left: 12%;
+	width: 26vw;
+	max-width: 360px;
+	height: 30vh;
+	z-index: 2;
+	transform: rotate(-2deg);
 }
 
 /* Hover effects para profundidad */
@@ -248,6 +329,30 @@
 
 .img-d:hover {
 	transform: scale(1.05) rotate(-8deg);
+}
+
+.img-g:hover {
+	transform: scale(1.05) rotate(6deg);
+}
+
+.img-h:hover {
+	transform: scale(1.05) rotate(-4deg);
+}
+
+.img-i:hover {
+	transform: translateX(-50%) scale(1.05) rotate(3deg);
+}
+
+.img-j:hover {
+	transform: scale(1.05) rotate(-5deg);
+}
+
+.img-k:hover {
+	transform: scale(1.05) rotate(7deg);
+}
+
+.img-l:hover {
+	transform: scale(1.05) rotate(-2deg);
 }
 
 /* Responsive Design */
@@ -372,7 +477,6 @@
 		grid-column: 1 / 5;
 		grid-row: 11 / 13;
 	}
-}
 
 /* --------------------------------------------------------------------------
    9. Contact Section
@@ -632,7 +736,7 @@
 .marquee-bar {
     width: 100%;
     overflow: hidden;
-    background: #FF69B4;
+    background: #01fb3b;
     padding: 30px 0;
     position: relative;
 }

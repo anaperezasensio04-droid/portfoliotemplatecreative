@@ -139,7 +139,7 @@ h1.title-projects-hero {
 	bottom: auto !important;
 	left: 50% !important;
 	transform: translate(-50%, -50%) !important;
-	z-index: 2 !important;
+	z-index: 4 !important;
 	font-size: clamp(4rem, 15vw, 12rem) !important;
 	color: #ffffff !important;
 	letter-spacing: -0.02em !important;

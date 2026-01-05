@@ -433,17 +433,34 @@ const items = document.querySelectorAll('.img-item');
 
 /**
  * Sistema drag and drop mejorado para mover imágenes hero por la pantalla
+ * Las imágenes vuelven a su posición original al hacer scroll
  */
 function initDragAndDrop() {
 	const heroImages = document.querySelectorAll('.hero-img');
-	console.log('Hero images encontradas:', heroImages.length); // Debug
+	console.log('Hero images encontradas:', heroImages.length);
 	
 	let draggedElement = null;
 	let offsetX = 0;
 	let offsetY = 0;
+	let lastScrollY = window.scrollY;
+
+	// Guardar posiciones y transforms originales para restaurar al scroll
+	const originalStyles = new Map();
+	heroImages.forEach((img) => {
+		const computed = window.getComputedStyle(img);
+		originalStyles.set(img, {
+			top: computed.top,
+			left: computed.left,
+			right: computed.right,
+			bottom: computed.bottom,
+			transform: computed.transform,
+			zIndex: computed.zIndex
+		});
+	});
+
 
 	function handleMouseDown(e) {
-		console.log('Mouse down en:', this.className); // Debug
+		console.log('Mouse down en:', this.className);
 		draggedElement = this;
 		this.style.cursor = 'grabbing';
 		this.style.zIndex = '1000';
@@ -466,14 +483,52 @@ function initDragAndDrop() {
 			draggedElement.style.top = y + 'px';
 			draggedElement.style.right = 'auto';
 			draggedElement.style.bottom = 'auto';
+			draggedElement.style.transform = 'none';
 		}
 	}
 
 	function handleMouseUp(e) {
 		if (draggedElement) {
-			console.log('Mouse up'); // Debug
+			console.log('Mouse up - restaurando elemento:', draggedElement.className);
 			draggedElement.style.cursor = 'grab';
+			
+			// Limpiar todos los estilos en línea que agregamos durante el drag
+			draggedElement.style.position = '';
+			draggedElement.style.top = '';
+			draggedElement.style.left = '';
+			draggedElement.style.right = '';
+			draggedElement.style.bottom = '';
+			draggedElement.style.transform = '';
+			draggedElement.style.zIndex = '';
+			
+			// El elemento volverá a sus estilos CSS originales
+			console.log('Estilos en línea limpiados para:', draggedElement.className);
 			draggedElement = null;
+		}
+	}
+
+	function resetImagesToOriginalPosition() {
+		console.log('Reseteando todas las imágenes a posición original');
+		heroImages.forEach((img) => {
+			// Limpiar todos los estilos en línea
+			img.style.position = '';
+			img.style.top = '';
+			img.style.left = '';
+			img.style.right = '';
+			img.style.bottom = '';
+			img.style.transform = '';
+			img.style.zIndex = '';
+			img.style.cursor = 'grab';
+		});
+		draggedElement = null;
+	}
+
+	function handleScroll() {
+		// Si ha habido cambio en la posición de scroll, resetear imágenes
+		const currentScrollY = window.scrollY;
+		if (currentScrollY !== lastScrollY) {
+			resetImagesToOriginalPosition();
+			lastScrollY = currentScrollY;
 		}
 	}
 
@@ -481,14 +536,15 @@ function initDragAndDrop() {
 	heroImages.forEach((img) => {
 		img.style.cursor = 'grab';
 		img.addEventListener('mousedown', handleMouseDown);
-		console.log('Listener añadido a:', img.className); // Debug
+		console.log('Listener añadido a:', img.className);
 	});
 
 	// Event listeners globales
 	document.addEventListener('mousemove', handleMouseMove);
 	document.addEventListener('mouseup', handleMouseUp);
+	window.addEventListener('scroll', handleScroll, { passive: true });
 	
-	console.log('Drag and drop inicializado'); // Debug
+	console.log('Drag and drop inicializado con reset al scroll');
 }
 
 // Inicializar cuando el DOM esté listo
