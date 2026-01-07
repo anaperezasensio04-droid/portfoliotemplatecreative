@@ -23,7 +23,7 @@
 			<a href="#" class="nav-logo">Portfolio</a>
 			<ul class="nav-links">
 				<li><a href="#hero">Home</a></li>
-				<li><a href="#about">About</a></li>
+				<li><a href="#services">Services</a></li>
 				<li><a href="#projects">Projects</a></li>
 				<li><a href="#contact">Contact</a></li>
 			</ul>
@@ -33,11 +33,15 @@
 	<main id="main">
 		<!-- Hero Section -->
 		<section id="hero" class="hero">
-			<div class="hero-bg parallax-bg"></div>
+			<video class="hero-bg parallax-bg" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+				<source src="https://ik.imagekit.io/cohwnscdit/Transition%2003.mp4" type="video/mp4">
+			</video>
 			<div class="hero-content">
-				<h1 class="hero-title animate-on-scroll">ANA PEREZ</h1>
-		
-				<a href="#projects" class="btn animate-on-scroll">View My Work</a>
+				<div class="hero-text-group">
+					<a href="#projects" class="btn-cta hero-cta animate-on-scroll">View My Work</a>
+					<p class="hero-description">I am a designer and visual storyteller, blending illustration, motion, and digital experiences to craft work that captivates and inspires. My projects range from dynamic audiovisual pieces to bold visual identities, all rooted in creative exploration and conceptual thinking. With a focus on originality and emotion, I aim to transform ideas into striking visuals that connect with audiences across screens and mediums. Every project is an opportunity to experiment, challenge boundaries, and shape stories that leave a lasting impression.</p>
+				</div>
+				<h1 class="hero-title animate-on-scroll">ANA&nbsp;PEREZ</h1>
 			</div>
 			<div class="scroll-indicator">
 				<span>Scroll</span>
@@ -45,61 +49,7 @@
 			</div>
 		</section>
 
-		<!-- About Section -->
-		<section id="about" class="section about">
-			<div class="container">
-				<h2 class="section-title animate-on-scroll">About Me</h2>
-				<div class="about-grid">
-					<div class="about-text animate-on-scroll">
-						<p>
-							I'm a passionate front-end developer with 5 years of experience
-							building responsive, accessible, and performant web applications.
-						</p>
-						<p>
-							My focus is on creating seamless user experiences through clean code
-							and thoughtful design. I believe in the power of vanilla JavaScript
-							and modern CSS to create stunning interfaces without framework bloat.
-						</p>
-					</div>
-					<div class="skills-grid" data-reveal-stagger>
-						<div class="skill-card">
-							<span class="skill-icon">🎨</span>
-							<h3>CSS/Sass</h3>
-							<div class="skill-bar"><div class="skill-fill" style="--fill: 95%"></div></div>
-						</div>
-						<div class="skill-card">
-							<span class="skill-icon">⚡</span>
-							<h3>JavaScript</h3>
-							<div class="skill-bar"><div class="skill-fill" style="--fill: 90%"></div></div>
-						</div>
-						<div class="skill-card">
-							<span class="skill-icon">📱</span>
-							<h3>Responsive</h3>
-							<div class="skill-bar"><div class="skill-fill" style="--fill: 98%"></div></div>
-						</div>
-						<div class="skill-card">
-							<span class="skill-icon">♿</span>
-							<h3>A11y</h3>
-							<div class="skill-bar"><div class="skill-fill" style="--fill: 85%"></div></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Marquee Bar -->
-		<div class="marquee-bar">
-            <div class="marquee-container">
-                <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
-                <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
-                <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
-                <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
-                <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
-                <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
-            </div>
-        </div>
-
-<!-- Projects Hero Section -->
+	<!-- Projects Hero Section -->
 	<section id="projects" class="projects-hero">
 		<!-- Micro-texto en bordes -->
 		
@@ -151,11 +101,97 @@
 
 		<!-- labios-->
 		<div class="hero-img img-k">
-			<img src="https://ik.imagekit.io/cohwnscdit/IMG_2952.jpeg" alt="Bottom Right">
+			<img src="https://ik.imagekit.io/cohwnscdit/IMG_2952.jpeg?updatedAt=1767615331789" alt="Bottom Right">
 		</div>
 
 	
 	</div>
+	</section>
+
+	<!-- Marquee Bar -->
+	<div class="marquee-bar">
+        <div class="marquee-container">
+            <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
+            <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
+            <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
+            <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
+            <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
+            <span class="marquee-text">I DEVELOP & CREATE DIGITAL FUTURE</span>
+        </div>
+    </div>
+
+<!-- Services Section -->
+	<section id="services" class="services">
+		<div class="services-container">
+			<div class="services-header">
+				<span class="services-label">SERVICES</span>
+				<h2 class="services-title">WHAT CAN I DO</h2>
+			</div>
+			<div class="services-accordion">
+				<div class="service-item">
+					<div class="service-header">
+						<span class="service-number">01</span>
+						<span class="service-name">ILLUSTRATION & ART DIRECTION</span>
+						<svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+						</svg>
+					</div>
+					<div class="service-content">
+						<p>I create illustrations with a strong visual identity, combining creativity, concept and detail. My work focuses on translating ideas and emotions into visual narratives that feel unique and intentional. Each project is developed from an initial concept and adapted to the needs, style and values of the brand or project.</p>
+						<button class="btn-cta">PHOTOSHOP</button>
+						<button class="btn-cta">ILLUSTRATOR</button>
+						<button class="btn-cta">FIGMA</button>
+					</div>
+				</div>
+
+				<div class="service-item">
+					<div class="service-header">
+						<span class="service-number">02</span>
+						<span class="service-name">AUDIOVISUAL DESIGN & MOTION </span>
+						<svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+						</svg>
+					</div>
+					<div class="service-content">
+						<p>I design and produce audiovisual pieces that merge motion, design and storytelling. From animated visuals to video content, I focus on rhythm, composition and atmosphere to create engaging pieces that capture attention and communicate messages in a clear and expressive way.</p>
+						<button class="btn-cta">AFTER EFFECTS</button>
+						<button class="btn-cta">PREMIER PRO</button>
+					
+					</div>
+				</div>
+
+				<div class="service-item">
+					<div class="service-header">
+						<span class="service-number">03</span>
+						<span class="service-name">BRANDING & VISUAL CONTENT</span>
+						<svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+						</svg>
+					</div>
+					<div class="service-content">
+						<p>I develop visual identities and content systems that help brands build a strong and recognizable presence. My approach combines aesthetic consistency with creative direction, ensuring that each visual element aligns with the brand’s personality across different platforms and formats.</p>
+						<button class="btn-cta">INDESIGN</button>
+						<button class="btn-cta">FIGMA</button>
+					</div>
+				</div>
+
+				<div class="service-item">
+					<div class="service-header">
+						<span class="service-number">04</span>
+						<span class="service-name">VISUAL STORYTELLING & CONCEPT DEVELOPMENT</span>
+						<svg class="service-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+						</svg>
+					</div>
+					<div class="service-content">
+						<p>I work on the development of visual concepts and narratives, shaping ideas from early stages into coherent visual stories. Through experimentation and creative direction, I help transform abstract concepts into expressive visuals that communicate meaning, atmosphere and identity.</p>
+						<button class="btn-cta">BLENDER</button>
+						<button class="btn-cta">CINEMA 4D</button>
+					    <button class="btn-cta">MIDJOURNEY</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 
 <!-- Contact Section -->

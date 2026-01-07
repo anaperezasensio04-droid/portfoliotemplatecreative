@@ -547,9 +547,40 @@ function initDragAndDrop() {
 	console.log('Drag and drop inicializado con reset al scroll');
 }
 
+// ==========================================================================
+// 6. SERVICES ACCORDION
+// ==========================================================================
+
+function initServicesAccordion() {
+	const serviceHeaders = document.querySelectorAll('.service-header');
+	
+	serviceHeaders.forEach((header) => {
+		header.addEventListener('click', () => {
+			const serviceItem = header.closest('.service-item');
+			const isActive = serviceItem.classList.contains('active');
+			
+			// Close all other items
+			document.querySelectorAll('.service-item.active').forEach((item) => {
+				if (item !== serviceItem) {
+					item.classList.remove('active');
+				}
+			});
+			
+			// Toggle current item
+			serviceItem.classList.toggle('active');
+		});
+	});
+	
+	console.log('Services accordion initialized');
+}
+
 // Inicializar cuando el DOM esté listo
 if (document.readyState === 'loading') {
-	document.addEventListener('DOMContentLoaded', initDragAndDrop);
+	document.addEventListener('DOMContentLoaded', () => {
+		initDragAndDrop();
+		initServicesAccordion();
+	});
 } else {
 	initDragAndDrop();
+	initServicesAccordion();
 }
