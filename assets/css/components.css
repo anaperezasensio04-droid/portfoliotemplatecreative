@@ -31,6 +31,139 @@
 	padding: 0 var(--space-lg);
 }
 
+/* New Contact Section (Split: left info, right form) */
+.contact-section {
+	background-color: #00ff00;
+	min-height: 80vh;
+	padding: 160px 96px;
+	color: #111;
+}
+
+.contact-container {
+	max-width: 1280px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1.2fr;
+	gap: 96px;
+}
+
+/* LEFT SIDE */
+.contact-info h2 {
+	font-size: clamp(2rem, 8vw, 4rem);
+	font-weight: 900;
+	line-height: 0.9;
+	margin-bottom: 40px;
+}
+
+.contact-item {
+	margin-bottom: 24px;
+}
+
+.contact-item span {
+	font-size: 0.9rem;
+	color: #777;
+}
+
+.contact-item p {
+	font-size: 1rem;
+	margin-top: 4px;
+}
+
+.contact-socials {
+	margin-top: 40px;
+}
+
+.contact-socials span {
+	font-size: 0.9rem;
+	color: #777;
+}
+
+.contact-socials .icons {
+	margin-top: 12px;
+	display: flex;
+	gap: 16px;
+}
+
+.contact-socials a {
+	text-decoration: none;
+	color: #111;
+	font-weight: 500;
+}
+
+/* FORM */
+.contact-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-row {
+	display: flex;
+	gap: 24px;
+	margin-bottom: 24px;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.form-group label {
+	font-size: 0.85rem;
+	color: #777;
+	margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+	border: none;
+	border-radius: 4px; /* Match CTA corner radius */
+	padding: 14px 20px;
+	font-size: 0.95rem;
+	outline: none;
+}
+
+.form-group textarea {
+	border-radius: 4px; /* Match CTA corner radius */
+	min-height: 160px;
+	resize: none;
+}
+
+.contact-form button {
+	margin-top: 32px; /* Visual spacing; visuals come from .btn-cta */
+}
+
+/* Invert CTA colors only in Contact form */
+.contact-form .btn-cta {
+	background: #000000;
+	color: #01fb3b;
+	border-color: #01fb3b;
+	box-shadow: 0 0 20px rgba(1, 251, 59, 0.25);
+}
+
+.contact-form .btn-cta:hover,
+.contact-form .btn-cta:focus {
+	background: #000000;
+	color: #01fb3b;
+	border-color: #01fb3b;
+	box-shadow: 0 0 24px rgba(1, 251, 59, 0.35);
+}
+
+@media (max-width: 900px) {
+	.contact-section {
+		padding: 96px 32px;
+	}
+
+	.contact-container {
+		grid-template-columns: 1fr;
+		gap: 48px;
+	}
+
+	.form-row {
+		flex-direction: column;
+	}
+}
+
 .services-header {
 	margin-bottom: var(--space-2xl);
 	text-align: right;
@@ -752,7 +885,7 @@
    9. Contact Section
    -------------------------------------------------------------------------- */
 .contact {
-	background: var(--color-bg-alt);
+	background: #01fb3b;
 	text-align: center;
 	margin-top: 0;
 	padding: 0;
