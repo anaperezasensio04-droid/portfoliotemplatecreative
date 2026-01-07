@@ -363,11 +363,15 @@ function initActiveNav() {
 			if (entry.isIntersecting) {
 				const id = entry.target.getAttribute('id');
 
-				// Update all nav links: highlight matching, reset others
+				// Update all nav links: add/remove active class for CSS underline/glow
 				navLinks.forEach((link) => {
-					link.style.color = link.getAttribute('href') === `#${id}`
-						? 'var(--color-accent)'  // Highlighted color
-						: '';                     // Reset to default (inherits from CSS)
+					const isMatch = link.getAttribute('href') === `#${id}`;
+					link.classList.toggle('active', isMatch);
+					if (isMatch) {
+						link.setAttribute('aria-current', 'page');
+					} else {
+						link.removeAttribute('aria-current');
+					}
 				});
 			}
 		});
@@ -375,6 +379,36 @@ function initActiveNav() {
 
 	// Observe all sections with IDs
 	sections.forEach((section) => navObserver.observe(section));
+}
+
+// ============================================================================
+// 5b. MOBILE NAV TOGGLE
+// ============================================================================
+
+function initMobileNavToggle() {
+	const nav = document.querySelector('.nav');
+	const toggle = document.querySelector('.nav-toggle');
+	const links = document.querySelectorAll('.nav-links a');
+
+	if (!nav || !toggle) return;
+
+	const closeMenu = () => {
+		nav.classList.remove('open');
+		toggle.setAttribute('aria-expanded', 'false');
+	};
+
+	toggle.addEventListener('click', () => {
+		const isOpen = nav.classList.toggle('open');
+		toggle.setAttribute('aria-expanded', String(isOpen));
+	});
+
+	// Close when selecting a link (UX consistency)
+	links.forEach((a) => a.addEventListener('click', closeMenu));
+
+	// Close on Escape key
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') closeMenu();
+	});
 }
 
 // ==========================================================================
@@ -397,6 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	initSmoothScroll();
 	initScrollIndicator();
 	initActiveNav();
+	initMobileNavToggle();
 
 	console.log('🚀 Grade 1 Demo: Vanilla scroll animations initialized');
 });

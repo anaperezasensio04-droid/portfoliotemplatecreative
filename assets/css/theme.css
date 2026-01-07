@@ -1,26 +1,27 @@
-/* Grupo del hero: CTA arriba del texto, anclado en esquina inferior derecha */
+/* Grupo del hero: CTA arriba del texto, centrado */
 .hero-text-group {
 	position: absolute !important;
-	right: var(--space-lg) !important;
-	bottom: clamp(5rem, 10vw, 12rem) !important;
+	left: 50% !important;
+	transform: translateX(-50%) !important;
+	bottom: clamp(8rem, 18vw, 16rem) !important;
 	display: flex !important;
 	flex-direction: column !important;
-	align-items: flex-end !important;
+	align-items: center !important;
 	gap: var(--space-md) !important;
 	z-index: 2 !important;
 }
 
 .hero-text-group .hero-description {
 	position: static !important;
-	text-align: right !important;
-	max-width: min(52ch, 50vw) !important;
+	text-align: center !important;
+	max-width: min(60ch, 70vw) !important;
 	font-size: clamp(0.85rem, 1.6vw, 1.05rem) !important;
 	line-height: 1.6 !important;
 	color: #cdcdcd !important;
 }
 
 .hero-text-group .hero-cta {
-	align-self: flex-end !important;
+	align-self: center !important;
 }
 /* ==========================================================================
    GRADE 1: VANILLA CSS PORTFOLIO DEMO
@@ -176,8 +177,9 @@ h1.hero-title {
 	line-height: 0.9 !important;
 	text-align: center !important;
 	margin: 0 !important;
-	padding: 0 !important;
+	padding: 0 var(--space-lg) !important;
 	max-width: none !important;
+	width: auto !important;
 	word-spacing: normal !important;
 	pointer-events: none;
 }
@@ -223,20 +225,56 @@ h1.hero-title {
 		max-width: min(52ch, 65vw) !important;
 		font-size: clamp(0.85rem, 2.1vw, 1.05rem) !important;
 	}
+	.hero-text-group {
+		right: auto !important;
+		left: 50% !important;
+		transform: translateX(-50%) !important;
+		bottom: clamp(7rem, 16vw, 14rem) !important;
+		gap: var(--space-sm) !important;
+		align-items: center !important;
+	}
+	.hero-text-group .hero-description {
+		max-width: min(48ch, 65vw) !important;
+		font-size: clamp(0.8rem, 1.8vw, 1rem) !important;
+	}
 }
 
 @media (max-width: 768px) {
 	.title-projects-hero {
-		font-size: clamp(2.5rem, 15vw, 6rem) !important;
+		font-size: clamp(2.2rem, 14vw, 5.5rem) !important;
+		padding: 0 var(--space-md) !important;
+		white-space: normal !important;
+		line-height: 0.85 !important;
+		width: auto !important;
 	}
 	.hero-title {
-		font-size: clamp(2.3rem, 14vw, 5.5rem) !important;
+		font-size: clamp(2.5rem, 13vw, 5rem) !important;
+		padding: 0 var(--space-sm) !important;
+		max-width: 95vw !important;
+		white-space: normal !important;
+		line-height: 0.85 !important;
 	}
 	.hero-description {
 		right: var(--space-md) !important;
 		bottom: clamp(3rem, 12vw, 7rem) !important;
 		max-width: 80vw !important;
 		font-size: clamp(0.85rem, 3.2vw, 1rem) !important;
+	}
+	.hero-text-group {
+		right: auto !important;
+		left: 50% !important;
+		transform: translateX(-50%) !important;
+		bottom: clamp(10rem, 30vw, 18rem) !important;
+		gap: var(--space-sm) !important;
+		align-items: center !important;
+	}
+	.hero-text-group .hero-description {
+		max-width: 85vw !important;
+		font-size: clamp(0.75rem, 3.2vw, 0.95rem) !important;
+		text-align: center !important;
+	}
+	.hero-text-group .hero-cta {
+		align-self: center !important;
 	}
 }
 
