@@ -22,7 +22,8 @@
    -------------------------------------------------------------------------- */
 .services {
 	background: var(--color-bg-alt);
-	padding: 160px 96px;
+	padding: 160px clamp(16px, 5vw, 96px);
+	overflow-x: hidden; /* guard against horizontal overflow */
 }
 
 .services-container {
@@ -297,7 +298,7 @@
 .service-item.active .service-content {
 	max-height: 500px;
 	opacity: 1;
-	padding: 0 0 var(--space-xl) 3rem;
+	padding: 0 0 var(--space-xl) clamp(1rem, 6vw, 3rem);
 }
 
 .service-content p {
@@ -358,7 +359,7 @@
 	}
 
 	.service-item.active .service-content {
-		padding: 0 0 var(--space-lg) 2rem;
+		padding: 0 0 var(--space-lg) clamp(0.75rem, 5vw, 2rem);
 	}
 }
 
@@ -461,7 +462,8 @@
 .editorial-footer {
 	background-color: #000;
 	color: #fff;
-	padding: 160px 96px;
+	padding: 160px clamp(16px, 5vw, 96px);
+	overflow-x: hidden; /* prevent horizontal strip */
 }
 
 .footer-top h2 {
@@ -479,18 +481,20 @@
 	display: grid;
 	grid-template-columns: 1fr auto auto;
 	align-items: start;
-	gap: 48px;
+	gap: clamp(24px, 4vw, 48px);
 	max-width: 1280px;
 	margin: 0 auto;
+	padding-inline: 0; /* rely on editorial-footer padding */
+	overflow: hidden; /* avoid content spill */
 }
 
 .footer-info p {
-	font-size: 0.95rem;
+	font-size: clamp(0.9rem, 1.8vw, 1rem);
 	margin-bottom: 4px;
 }
 
 .footer-info span {
-	font-size: 0.95rem;
+	font-size: clamp(0.9rem, 1.8vw, 1rem);
 	opacity: 0.6;
 }
 
@@ -499,7 +503,7 @@
 	flex-direction: column;
 	gap: 12px;
 	align-self: start;
-	margin-top: -270px;
+	margin-top: clamp(-120px, -20vw, -270px);
 }
 
 .footer-social {
@@ -507,13 +511,14 @@
 	flex-direction: column;
 	gap: 12px;
 	align-self: start;
-	margin-top: -270px;
+	margin-top: clamp(-120px, -20vw, -270px);
+	margin-left: clamp(-12px, -2vw, -36px); /* Push social buttons further left for alignment */
 }
 
 .footer-links a {
 	text-decoration: none;
 	color: #fff;
-	font-size: 0.95rem;
+	font-size: clamp(0.85rem, 1.8vw, 0.95rem);
 	opacity: 0.7;
 	transition: opacity 0.3s ease;
 }
@@ -525,7 +530,7 @@
 .footer-social a {
 	text-decoration: none;
 	color: #000;
-	font-size: 0.95rem;
+	font-size: clamp(0.85rem, 1.8vw, 0.95rem);
 	font-weight: 600;
 	display: inline-flex;
 	align-items: center;
@@ -544,18 +549,33 @@
 	border-color: #01fb3b;
 }
 
+/* Footer responsive spacing adjustments */
+@media (max-width: 1024px) {
+	.footer-links,
+	.footer-social { margin-top: -120px; }
+}
+
+@media (max-width: 900px) {
+	.footer-links,
+	.footer-social { margin-top: 0; margin-left: 0; }
+}
+
+@media (max-width: 640px) {
+	.footer-social a { width: 44px; height: 44px; }
+}
+
 @media (max-width: 900px) {
 	.editorial-footer {
-		padding: 60px 32px;
+		padding: clamp(48px, 10vw, 60px) clamp(16px, 6vw, 32px);
 	}
 
 	.footer-bottom {
 		grid-template-columns: 1fr;
-		gap: 32px;
+		gap: clamp(20px, 6vw, 32px);
 	}
 
 	.footer-top h2 {
-		margin-bottom: 48px;
+		margin-bottom: clamp(28px, 6vw, 48px);
 	}
 }
 
@@ -613,7 +633,7 @@
 .skill-card h3 {
 	font-family: "BBH Sans Bartle", sans-serif !important;
 	font-weight: 400 !important;
-	font-size: var(--text-sm);
+	font-size: clamp(0.95rem, 2.2vw, 1.1rem);
 	margin-bottom: var(--space-sm);
 }
 
@@ -1330,6 +1350,7 @@
    13. Mobile Adjustments
    -------------------------------------------------------------------------- */
 @media (max-width: 640px) {
+	.footer-top h2 { font-size: clamp(2.4rem, 8.5vw, 3.4rem); }
 	.nav-links {
 		display: none; /* Would be hamburger menu in production */
 	}
