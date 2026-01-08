@@ -1,96 +1,26 @@
 /**
- * ==========================================================================
- * GRADE 1: VANILLA JAVASCRIPT PORTFOLIO DEMO
- * Scroll animations using IntersectionObserver
- * No frameworks, no dependencies — just modern JavaScript!
- * ==========================================================================
- *
- * 🎓 LEARNING OBJECTIVES:
- * - Understand the IntersectionObserver API for scroll-based triggers
- * - Learn why IntersectionObserver is better than scroll event listeners
- * - Implement accessible animations with prefers-reduced-motion
- * - Master the observer pattern for performant scroll detection
- *
- * 📚 WHAT IS INTERSECTIONOBSERVER?
- * IntersectionObserver is a browser API that efficiently detects when elements
- * enter or leave the viewport (or any ancestor element). It's the modern
- * replacement for scroll event listeners.
- *
- * ⚡ WHY NOT USE addEventListener('scroll', ...)?
- * - scroll events fire on EVERY PIXEL of scroll (60+ times per second!)
- * - This blocks the main thread and causes "jank" (stuttering)
- * - IntersectionObserver is optimized by the browser, runs asynchronously,
- *   and only fires when intersection state actually changes
- *
- * 🔗 MDN DOCS: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+ * Portfolio JavaScript - Scroll Animations & Interactions
+ * IntersectionObserver-based animations with accessibility support
  */
 
-// ==========================================================================
-// 1. INTERSECTIONOBSERVER CONFIGURATION
-// ==========================================================================
-
-/**
- * Observer options control WHEN the callback fires.
- *
- * 📐 UNDERSTANDING THE OPTIONS:
- *
- * root: The element to use as the viewport for checking visibility.
- *       - null = browser viewport (most common)
- *       - element = custom scroll container
- *
- * rootMargin: Expands or shrinks the root's bounding box.
- *       - Format: "top right bottom left" (like CSS margin)
- *       - Negative values shrink the detection area
- *       - "0px 0px -10% 0px" means: trigger when element is 10% INTO the viewport
- *         (not at the very edge, which feels more natural)
- *
- * threshold: What percentage of the element must be visible to trigger.
- *       - 0 = trigger as soon as 1 pixel is visible
- *       - 0.1 = trigger when 10% is visible
- *       - 1.0 = trigger only when 100% visible
- *       - [0, 0.5, 1] = trigger at multiple thresholds
- */
+// IntersectionObserver Configuration
 const observerOptions = {
-	root: null,                        // Use the browser viewport
-	rootMargin: '0px 0px -10% 0px',    // Trigger 10% before fully visible
-	threshold: 0.1,                     // Need 10% visibility to trigger
+	root: null,
+	rootMargin: '0px 0px -10% 0px',
+	threshold: 0.1,
 };
 
-/**
- * CALLBACK: Single-element reveals
- *
- * This function is called by IntersectionObserver whenever an observed
- * element's intersection state changes.
- *
- * @param {IntersectionObserverEntry[]} entries - Array of intersection events
- * @param {IntersectionObserver} observer - The observer instance (for cleanup)
- *
- * 📐 WHAT'S IN AN ENTRY?
- * - entry.isIntersecting: boolean - is element currently visible?
- * - entry.intersectionRatio: number - how much is visible (0-1)
- * - entry.target: Element - the DOM element being observed
- * - entry.boundingClientRect: DOMRect - element's position/size
- */
+// Callback for single-element reveals
 const revealOnScroll = (entries, observer) => {
 	entries.forEach((entry) => {
 		if (entry.isIntersecting) {
-			// Add class that triggers CSS transition (see style.css)
 			entry.target.classList.add('visible');
-
-			// 🎯 PERFORMANCE OPTIMIZATION: Stop observing after reveal
-			// Once an element is revealed, we don't need to watch it anymore.
-			// This reduces work for the observer and prevents re-triggering.
 			observer.unobserve(entry.target);
 		}
 	});
 };
 
-/**
- * CALLBACK: Staggered container reveals
- *
- * Same pattern, but adds 'revealed' class to containers.
- * CSS handles the staggered animation of children via transition-delay.
- */
+// Callback for staggered container reveals
 const revealStaggered = (entries, observer) => {
 	entries.forEach((entry) => {
 		if (entry.isIntersecting) {
@@ -100,522 +30,109 @@ const revealStaggered = (entries, observer) => {
 	});
 };
 
-/**
- * CREATE OBSERVER INSTANCES
- *
- * We create two separate observers because they add different classes.
- * You could use one observer with logic to determine which class to add,
- * but separate observers are clearer and more maintainable.
- */
+// Create observer instances
 const singleObserver = new IntersectionObserver(revealOnScroll, observerOptions);
 const staggerObserver = new IntersectionObserver(revealStaggered, observerOptions);
 
-// ==========================================================================
-// 2. INITIALIZE OBSERVERS
-// ==========================================================================
-
-/**
- * Main initialization function for scroll animations.
- *
- * 🎓 KEY CONCEPT: PROGRESSIVE ENHANCEMENT
- * We check for reduced motion FIRST, before setting up any animations.
- * This ensures users who need reduced motion get a good experience immediately.
- *
- * 📐 THE FLOW:
- * 1. Check if user prefers reduced motion
- * 2. If yes → make everything visible immediately, skip animations
- * 3. If no → set up observers to trigger animations on scroll
- */
+// Initialize scroll animations
 function initScrollAnimations() {
-	/**
-	 * CHECK FOR REDUCED MOTION PREFERENCE
-	 *
-	 * window.matchMedia() is like CSS media queries, but in JavaScript!
-	 * It returns a MediaQueryList object with a .matches boolean property.
-	 *
-	 * This respects the user's OS-level accessibility settings:
-	 * - macOS: System Preferences → Accessibility → Display → Reduce motion
-	 * - Windows: Settings → Ease of Access → Display → Show animations
-	 * - iOS: Settings → Accessibility → Motion → Reduce Motion
-	 *
-	 * ⚠️ IMPORTANT: Always check this BEFORE initializing animations!
-	 */
-	const prefersReducedMotion = window.matchMedia(
-		'(prefers-reduced-motion: reduce)'
-	).matches;
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	if (prefersReducedMotion) {
-		/**
-		 * GRACEFUL DEGRADATION FOR REDUCED MOTION
-		 *
-		 * Instead of animations, we immediately show all content.
-		 * Users get the same information, just without the motion.
-		 *
-		 * This is NOT about removing features — it's about providing
-		 * an equivalent experience for users who need it.
-		 */
 		document.querySelectorAll('.animate-on-scroll').forEach((el) => {
 			el.classList.add('visible');
 		});
 		document.querySelectorAll('[data-reveal-stagger]').forEach((el) => {
 			el.classList.add('revealed');
 		});
-		return; // Exit early — no observers needed
+		return;
 	}
 
-	/**
-	 * OBSERVE ELEMENTS FOR SCROLL-TRIGGERED ANIMATIONS
-	 *
-	 * querySelectorAll returns a NodeList (array-like).
-	 * forEach loops through each element and tells the observer to watch it.
-	 *
-	 * Once observed, the callback (revealOnScroll) will fire when the
-	 * element enters the viewport according to our observerOptions.
-	 */
-
-	// Single element reveals (e.g., headings, paragraphs)
 	document.querySelectorAll('.animate-on-scroll').forEach((el) => {
 		singleObserver.observe(el);
 	});
 
-	// Staggered container reveals (e.g., skill grids, project cards)
 	document.querySelectorAll('[data-reveal-stagger]').forEach((el) => {
 		staggerObserver.observe(el);
 	});
 }
 
-// ==========================================================================
-// 3. SMOOTH SCROLL FOR ANCHOR LINKS
-// ==========================================================================
-
-/**
- * Enhanced smooth scrolling for in-page navigation.
- *
- * 🎓 WHY NOT JUST USE CSS scroll-behavior: smooth?
- * CSS smooth scrolling works great, but it has limitations:
- * 1. Can't account for fixed header height
- * 2. Can't update URL without page jump
- * 3. Less control over timing/easing
- *
- * This JavaScript approach gives us full control while still being simple.
- *
- * 📐 THE PATTERN:
- * 1. Find all links starting with "#" (anchor links)
- * 2. On click, prevent default jump behavior
- * 3. Calculate target position accounting for fixed nav height
- * 4. Smoothly scroll to that position
- * 5. Update URL for bookmarking/sharing
- */
+// Smooth scroll for anchor links
 function initSmoothScroll() {
-	// Select all anchor links (href starts with "#")
 	document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-		anchor.addEventListener('click', (e) => {
-			const targetId = anchor.getAttribute('href');
+		anchor.addEventListener('click', function (e) {
+			const href = this.getAttribute('href');
+			if (href === '#') return;
 
-			// Ignore links that are just "#" (often used for JavaScript triggers)
-			if (targetId === '#') return;
+			e.preventDefault();
+			const target = document.querySelector(href);
+			if (!target) return;
 
-			const target = document.querySelector(targetId);
-			if (target) {
-				// Prevent the default "jump to anchor" behavior
-				e.preventDefault();
+			const headerOffset = 80;
+			const elementPosition = target.getBoundingClientRect().top;
+			const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-				/**
-				 * CALCULATE SCROLL POSITION
-				 *
-				 * We need to account for the fixed navigation bar, otherwise
-				 * the target would be hidden behind it.
-				 *
-				 * getBoundingClientRect().top = distance from viewport top
-				 * window.scrollY = how far page is already scrolled
-				 * navHeight = height of fixed nav to offset
-				 */
-				const navHeight = document.querySelector('.nav')?.offsetHeight || 0;
-				const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight;
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: 'smooth',
+			});
 
-				/**
-				 * SCROLL WITH SMOOTH BEHAVIOR
-				 *
-				 * window.scrollTo() with behavior: 'smooth' animates the scroll.
-				 * This is supported in all modern browsers.
-				 *
-				 * Note: CSS scroll-behavior: smooth on <html> provides a fallback
-				 * for browsers where this JS might fail.
-				 */
-				window.scrollTo({
-					top: targetPosition,
-					behavior: 'smooth',
-				});
-
-				/**
-				 * UPDATE URL WITHOUT PAGE RELOAD
-				 *
-				 * history.pushState() changes the URL in the address bar
-				 * without triggering a page reload or scroll jump.
-				 *
-				 * This means:
-				 * - Users can bookmark specific sections
-				 * - Sharing the URL goes to the right section
-				 * - Back button works as expected
-				 */
-				history.pushState(null, '', targetId);
+			if (history.pushState) {
+				history.pushState(null, null, href);
 			}
 		});
 	});
 }
 
-// ==========================================================================
-// 4. SCROLL INDICATOR CLICK HANDLER
-// ==========================================================================
+// Mobile navigation toggle
+function initMobileNav() {
+	const navToggle = document.querySelector('.nav-toggle');
+	const nav = document.querySelector('.nav');
+	const navLinks = document.querySelectorAll('.nav-links a');
 
-/**
- * Makes the hero scroll indicator clickable to scroll to the next section.
- *
- * 🎓 UX PRINCIPLE: AFFORDANCE
- * The scroll indicator visually suggests "scroll down" — making it clickable
- * reinforces this affordance and provides an alternative interaction method.
- *
- * 📐 THE PATTERN:
- * 1. Find the scroll indicator element
- * 2. Add click event listener
- * 3. Scroll to the next section (About) with smooth animation
- * 4. Account for fixed navigation height
- */
-function initScrollIndicator() {
-	const scrollIndicator = document.querySelector('.scroll-indicator');
-	const nextSection = document.querySelector('#about');
+	if (!navToggle) return;
 
-	if (!scrollIndicator || !nextSection) return;
+	navToggle.addEventListener('click', () => {
+		nav.classList.toggle('open');
+	});
 
-	// Make it visually interactive
-	scrollIndicator.style.cursor = 'pointer';
-	scrollIndicator.setAttribute('role', 'button');
-	scrollIndicator.setAttribute('aria-label', 'Scroll to About section');
-	scrollIndicator.setAttribute('tabindex', '0');
-
-	/**
-	 * Scroll to the next section
-	 */
-	const scrollToNext = () => {
-		const prefersReducedMotion = window.matchMedia(
-			'(prefers-reduced-motion: reduce)'
-		).matches;
-
-		const navHeight = document.querySelector('.nav')?.offsetHeight || 0;
-		const targetPosition = nextSection.getBoundingClientRect().top + window.scrollY - navHeight;
-
-		window.scrollTo({
-			top: targetPosition,
-			behavior: prefersReducedMotion ? 'auto' : 'smooth',
+	navLinks.forEach((link) => {
+		link.addEventListener('click', () => {
+			nav.classList.remove('open');
 		});
-	};
+	});
 
-	// Handle click
-	scrollIndicator.addEventListener('click', scrollToNext);
-
-	// Handle keyboard (Enter/Space) for accessibility
-	scrollIndicator.addEventListener('keydown', (e) => {
-		if (e.key === 'Enter' || e.key === ' ') {
-			e.preventDefault();
-			scrollToNext();
+	document.addEventListener('click', (e) => {
+		if (!nav.contains(e.target) && nav.classList.contains('open')) {
+			nav.classList.remove('open');
 		}
 	});
 }
 
-// ==========================================================================
-// 5. ACTIVE NAVIGATION STATE
-// ==========================================================================
+// Services accordion
+function initServicesAccordion() {
+	const serviceHeaders = document.querySelectorAll('.service-header');
 
-/**
- * Highlight the nav link corresponding to the currently visible section.
- *
- * 🎓 UX PRINCIPLE: LOCATION AWARENESS
- * Users should always know where they are in the page. Highlighting the
- * active nav link provides this feedback without requiring user action.
- *
- * 📐 THE APPROACH:
- * We use IntersectionObserver again! But with different rootMargin settings
- * that define a "detection zone" in the middle of the viewport.
- *
- * rootMargin: '-50% 0px -50% 0px' means:
- * - Shrink the detection area by 50% from top AND bottom
- * - This creates a narrow band in the middle of the viewport
- * - Only the section crossing this band is considered "active"
- */
-function initActiveNav() {
-	const sections = document.querySelectorAll('section[id]');
-	const navLinks = document.querySelectorAll('.nav-links a');
+	serviceHeaders.forEach((header) => {
+		header.addEventListener('click', () => {
+			const item = header.parentElement;
+			const wasActive = item.classList.contains('active');
 
-	const observerOptions = {
-		root: null,
-		rootMargin: '-50% 0px -50% 0px',  // Detect section in middle of viewport
-		threshold: 0,                      // Trigger as soon as ANY part enters
-	};
+			document.querySelectorAll('.service-item').forEach((otherItem) => {
+				otherItem.classList.remove('active');
+			});
 
-	/**
-	 * NAV HIGHLIGHT OBSERVER
-	 *
-	 * When a section enters our detection zone (middle of viewport),
-	 * we find the corresponding nav link and highlight it.
-	 */
-	const navObserver = new IntersectionObserver((entries) => {
-		entries.forEach((entry) => {
-			if (entry.isIntersecting) {
-				const id = entry.target.getAttribute('id');
-
-				// Update all nav links: add/remove active class for CSS underline/glow
-				navLinks.forEach((link) => {
-					const isMatch = link.getAttribute('href') === `#${id}`;
-					link.classList.toggle('active', isMatch);
-					if (isMatch) {
-						link.setAttribute('aria-current', 'page');
-					} else {
-						link.removeAttribute('aria-current');
-					}
-				});
+			if (!wasActive) {
+				item.classList.add('active');
 			}
 		});
-	}, observerOptions);
-
-	// Observe all sections with IDs
-	sections.forEach((section) => navObserver.observe(section));
-}
-
-// ============================================================================
-// 5b. MOBILE NAV TOGGLE
-// ============================================================================
-
-function initMobileNavToggle() {
-	const nav = document.querySelector('.nav');
-	const toggle = document.querySelector('.nav-toggle');
-	const links = document.querySelectorAll('.nav-links a');
-
-	if (!nav || !toggle) return;
-
-	const closeMenu = () => {
-		nav.classList.remove('open');
-		toggle.setAttribute('aria-expanded', 'false');
-	};
-
-	toggle.addEventListener('click', () => {
-		const isOpen = nav.classList.toggle('open');
-		toggle.setAttribute('aria-expanded', String(isOpen));
-	});
-
-	// Close when selecting a link (UX consistency)
-	links.forEach((a) => a.addEventListener('click', closeMenu));
-
-	// Close on Escape key
-	document.addEventListener('keydown', (e) => {
-		if (e.key === 'Escape') closeMenu();
 	});
 }
 
-// ==========================================================================
-// 6. INITIALIZATION
-// ==========================================================================
-
-/**
- * DOMContentLoaded: The safe time to run DOM-manipulating JavaScript.
- *
- * 🎓 WHY DOMContentLoaded?
- * - Fires when HTML is fully parsed (DOM is ready)
- * - Doesn't wait for images/stylesheets to load (that's 'load' event)
- * - Safe to query and manipulate DOM elements
- *
- * If your script is in <head> without 'defer', this is essential.
- * If your script is at end of <body> or has 'defer', it's optional but good practice.
- */
+// Initialize all on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
 	initScrollAnimations();
 	initSmoothScroll();
-	initScrollIndicator();
-	initActiveNav();
-	initMobileNavToggle();
-
-	console.log('🚀 Grade 1 Demo: Vanilla scroll animations initialized');
-});
-
-/* --------------------------------------------------------------------------
-   Animación de tarjetas al scroll - Collage Layout
-   Intersection Observer con fade in + translateY
-   -------------------------------------------------------------------------- */
-
-document.addEventListener('DOMContentLoaded', () => {
-	const items = document.querySelectorAll('.img-item');
-	
-	const observer = new IntersectionObserver(entries => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add('in-view');
-				observer.unobserve(entry.target);
-			}
-		});
-	}, { threshold: 0.3 });
-	
-	items.forEach(item => observer.observe(item));
-});
-
-// ==========================================================================
-// IMAGE ITEMS
-// ==========================================================================
-
-const items = document.querySelectorAll('.img-item');
-
-// ==========================================================================
-// DRAG AND DROP PARA IMÁGENES HERO
-// ==========================================================================
-
-/**
- * Sistema drag and drop mejorado para mover imágenes hero por la pantalla
- * Las imágenes vuelven a su posición original al hacer scroll
- */
-function initDragAndDrop() {
-	const heroImages = document.querySelectorAll('.hero-img');
-	console.log('Hero images encontradas:', heroImages.length);
-	
-	let draggedElement = null;
-	let offsetX = 0;
-	let offsetY = 0;
-	let lastScrollY = window.scrollY;
-
-	// Guardar posiciones y transforms originales para restaurar al scroll
-	const originalStyles = new Map();
-	heroImages.forEach((img) => {
-		const computed = window.getComputedStyle(img);
-		originalStyles.set(img, {
-			top: computed.top,
-			left: computed.left,
-			right: computed.right,
-			bottom: computed.bottom,
-			transform: computed.transform,
-			zIndex: computed.zIndex
-		});
-	});
-
-
-	function handleMouseDown(e) {
-		console.log('Mouse down en:', this.className);
-		draggedElement = this;
-		this.style.cursor = 'grabbing';
-		this.style.zIndex = '1000';
-
-		const rect = this.getBoundingClientRect();
-		offsetX = e.clientX - rect.left;
-		offsetY = e.clientY - rect.top;
-
-		e.preventDefault();
-		e.stopPropagation();
-	}
-
-	function handleMouseMove(e) {
-		if (draggedElement) {
-			const x = e.clientX - offsetX;
-			const y = e.clientY - offsetY;
-
-			draggedElement.style.position = 'fixed';
-			draggedElement.style.left = x + 'px';
-			draggedElement.style.top = y + 'px';
-			draggedElement.style.right = 'auto';
-			draggedElement.style.bottom = 'auto';
-			draggedElement.style.transform = 'none';
-		}
-	}
-
-	function handleMouseUp(e) {
-		if (draggedElement) {
-			console.log('Mouse up - restaurando elemento:', draggedElement.className);
-			draggedElement.style.cursor = 'grab';
-			
-			// Limpiar todos los estilos en línea que agregamos durante el drag
-			draggedElement.style.position = '';
-			draggedElement.style.top = '';
-			draggedElement.style.left = '';
-			draggedElement.style.right = '';
-			draggedElement.style.bottom = '';
-			draggedElement.style.transform = '';
-			draggedElement.style.zIndex = '';
-			
-			// El elemento volverá a sus estilos CSS originales
-			console.log('Estilos en línea limpiados para:', draggedElement.className);
-			draggedElement = null;
-		}
-	}
-
-	function resetImagesToOriginalPosition() {
-		console.log('Reseteando todas las imágenes a posición original');
-		heroImages.forEach((img) => {
-			// Limpiar todos los estilos en línea
-			img.style.position = '';
-			img.style.top = '';
-			img.style.left = '';
-			img.style.right = '';
-			img.style.bottom = '';
-			img.style.transform = '';
-			img.style.zIndex = '';
-			img.style.cursor = 'grab';
-		});
-		draggedElement = null;
-	}
-
-	function handleScroll() {
-		// Si ha habido cambio en la posición de scroll, resetear imágenes
-		const currentScrollY = window.scrollY;
-		if (currentScrollY !== lastScrollY) {
-			resetImagesToOriginalPosition();
-			lastScrollY = currentScrollY;
-		}
-	}
-
-	// Añadir event listeners a cada imagen
-	heroImages.forEach((img) => {
-		img.style.cursor = 'grab';
-		img.addEventListener('mousedown', handleMouseDown);
-		console.log('Listener añadido a:', img.className);
-	});
-
-	// Event listeners globales
-	document.addEventListener('mousemove', handleMouseMove);
-	document.addEventListener('mouseup', handleMouseUp);
-	window.addEventListener('scroll', handleScroll, { passive: true });
-	
-	console.log('Drag and drop inicializado con reset al scroll');
-}
-
-// ==========================================================================
-// 6. SERVICES ACCORDION
-// ==========================================================================
-
-function initServicesAccordion() {
-	const serviceHeaders = document.querySelectorAll('.service-header');
-	
-	serviceHeaders.forEach((header) => {
-		header.addEventListener('click', () => {
-			const serviceItem = header.closest('.service-item');
-			const isActive = serviceItem.classList.contains('active');
-			
-			// Close all other items
-			document.querySelectorAll('.service-item.active').forEach((item) => {
-				if (item !== serviceItem) {
-					item.classList.remove('active');
-				}
-			});
-			
-			// Toggle current item
-			serviceItem.classList.toggle('active');
-		});
-	});
-	
-	console.log('Services accordion initialized');
-}
-
-// Inicializar cuando el DOM esté listo
-if (document.readyState === 'loading') {
-	document.addEventListener('DOMContentLoaded', () => {
-		initDragAndDrop();
-		initServicesAccordion();
-	});
-} else {
-	initDragAndDrop();
+	initMobileNav();
 	initServicesAccordion();
-}
+});

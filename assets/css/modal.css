@@ -1,0 +1,143 @@
+/* --------------------------------------------------------------------------
+   Modal System for Projects
+   -------------------------------------------------------------------------- */
+
+.modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.92);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	z-index: 9999;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+	display: flex;
+	opacity: 1;
+}
+
+.modal-content {
+	position: relative;
+	background: #0a0a0a;
+	border: 1px solid rgba(1, 251, 59, 0.2);
+	border-radius: 8px;
+	max-width: 90vw;
+	max-height: 85vh;
+	width: 1000px;
+	overflow-y: auto;
+	padding: clamp(24px, 5vw, 48px);
+	transform: scale(0.9) translateY(20px);
+	transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+	transform: scale(1) translateY(0);
+}
+
+.modal-close {
+	position: absolute;
+	top: clamp(12px, 3vw, 20px);
+	right: clamp(12px, 3vw, 20px);
+	width: 40px;
+	height: 40px;
+	background: transparent;
+	border: 2px solid #01fb3b;
+	border-radius: 50%;
+	color: #01fb3b;
+	font-size: 24px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	z-index: 10;
+}
+
+.modal-close:hover {
+	background: #01fb3b;
+	color: #000;
+	transform: rotate(90deg);
+}
+
+.modal-header h3 {
+	font-size: clamp(1.8rem, 5vw, 3rem);
+	color: #01fb3b;
+	margin-bottom: 8px;
+	font-family: "BBH Sans Bartle", sans-serif;
+	font-weight: 900;
+}
+
+.modal-category {
+	font-size: clamp(0.85rem, 2vw, 1rem);
+	color: rgba(255, 255, 255, 0.6);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	margin-bottom: 24px;
+}
+
+.modal-media {
+	margin: 32px 0;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.modal-media img,
+.modal-media video {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.modal-description {
+	color: rgba(255, 255, 255, 0.85);
+	line-height: 1.7;
+	font-size: clamp(0.95rem, 2vw, 1.05rem);
+	margin-bottom: 24px;
+}
+
+.modal-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-top: 32px;
+}
+
+.modal-tag {
+	padding: 8px 16px;
+	background: transparent;
+	border: 1px solid #01fb3b;
+	color: #01fb3b;
+	font-size: 0.85rem;
+	border-radius: 4px;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+}
+
+/* Make project images clickable */
+.hero-img {
+	cursor: pointer;
+	transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.hero-img:hover {
+	filter: brightness(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.modal-content {
+		max-width: 95vw;
+		max-height: 90vh;
+		padding: clamp(20px, 4vw, 32px);
+	}
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+	overflow: hidden;
+}

@@ -1,4 +1,68 @@
-/* Grupo del hero: CTA arriba del texto, centrado */
+/* Design Tokens & Variables */
+:root {
+	/* Colors */
+	--color-bg: #0f0f0f;
+	--color-bg-alt: #1a1a1a;
+	--color-text: #e0e0e0;
+	--color-text-muted: #a0a0a0;
+	--color-accent: #00ff00;
+	--color-accent-hover: #00cc00;
+
+	/* Spacing */
+	--space-xs: 0.25rem;
+	--space-sm: 0.5rem;
+	--space-md: 1rem;
+	--space-lg: 1.5rem;
+	--space-xl: 2rem;
+	--space-2xl: 4rem;
+
+	/* Typography */
+	--text-xs: 0.75rem;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1.125rem;
+	--text-xl: 1.25rem;
+	--text-2xl: 1.5rem;
+	--text-3xl: 2rem;
+
+	/* Animation */
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+	--duration-normal: 0.6s;
+}
+
+/* BBH Sans Bartle Font */
+@font-face {
+    font-family: "BBH Sans Bartle";
+    src: url('../fonts/BBHSansBartle-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "BBH Sans Bartle", sans-serif !important;
+    font-weight: 400 !important;
+}
+
+h1 { font-size: clamp(2rem, 7vw, 4rem); line-height: 0.95; }
+h2 { font-size: clamp(1.8rem, 6vw, 3rem); line-height: 0.95; }
+h3 { font-size: clamp(1.5rem, 4.8vw, 2.2rem); line-height: 1.05; }
+h4 { font-size: clamp(1.3rem, 3.6vw, 1.8rem); line-height: 1.1; }
+h5 { font-size: clamp(1.1rem, 2.8vw, 1.4rem); line-height: 1.15; }
+h6 { font-size: clamp(1rem, 2.4vw, 1.2rem); line-height: 1.2; }
+
+h1.title-projects-hero,
+h1.hero-title {
+    font-weight: 900 !important;
+}
+
+.section-title {
+    font-family: "BBH Sans Bartle", sans-serif !important;
+    font-weight: 400 !important;
+}
+
+/* Hero text group */
 .hero-text-group {
 	position: absolute !important;
 	left: 50% !important;
@@ -8,7 +72,7 @@
 	flex-direction: column !important;
 	align-items: center !important;
 	gap: var(--space-md) !important;
-	z-index: 2 !important;
+	z-index: 3 !important;
 }
 
 .hero-text-group .hero-description {
@@ -23,155 +87,8 @@
 .hero-text-group .hero-cta {
 	align-self: center !important;
 }
-/* ==========================================================================
-   GRADE 1: VANILLA CSS PORTFOLIO DEMO
-   Scroll Architecture with IntersectionObserver + CSS scroll-timeline
 
-   🎓 LEARNING OBJECTIVES:
-   - Master CSS Custom Properties (CSS Variables) for scalable design systems
-   - Understand fluid typography using clamp() for responsive text
-   - Implement scroll-driven animations with modern CSS (no JavaScript!)
-   - Create performant animations using transform and opacity only
-   - Build accessible animations with prefers-reduced-motion
-
-   📚 PREREQUISITES:
-   - CSS basics (selectors, box model, positioning)
-   - Understanding of responsive design concepts
-   - Familiarity with CSS transitions and keyframes
-
-   ⚠️ BROWSER SUPPORT:
-   - CSS scroll-timeline: Chrome 115+, Edge 115+, Firefox 110+ (with flag)
-   - IntersectionObserver: 97%+ browser support (excellent fallback)
-   ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   1. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
-
-   🎓 WHY CUSTOM PROPERTIES?
-   Custom properties (CSS variables) create a single source of truth for your
-   design values. Change one variable, update the entire site. This is the
-   foundation of a design system.
-
-   📐 THE clamp() FUNCTION EXPLAINED:
-   clamp(minimum, preferred, maximum)
-
-   Example: clamp(1rem, 0.9rem + 0.5vw, 1.125rem)
-   - minimum: 1rem (16px) — never smaller than this
-   - preferred: 0.9rem + 0.5vw — scales with viewport width
-   - maximum: 1.125rem (18px) — never larger than this
-
-   The "0.9rem + 0.5vw" creates a fluid value that grows as the viewport
-   widens. The 0.5vw adds responsiveness (0.5% of viewport width).
-
-   🧮 FORMULA FOR FLUID VALUES:
-   preferred = min + (max - min) × (current-vw - min-vw) / (max-vw - min-vw)
-   But clamp() does this automatically! You just set the boundaries.
-   -------------------------------------------------------------------------- */
-:root {
-	/*
-	 * FLUID TYPOGRAPHY SCALE
-	 *
-	 * This creates a harmonious type scale that smoothly adjusts between
-	 * mobile (320px) and desktop (1200px) viewports.
-	 *
-	 * Scale ratio: ~1.125 (Major Second) — subtle but professional
-	 * Each step is roughly 12.5% larger than the previous
-	 */
-	--text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);    /* 12px → 14px */
-	--text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);      /* 14px → 16px */
-	--text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);      /* 16px → 18px (body text) */
-	--text-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);     /* 18px → 20px */
-	--text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);      /* 20px → 24px */
-	--text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);       /* 24px → 32px */
-	--text-3xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);           /* 32px → 48px (section titles) */
-	--text-4xl: clamp(2.5rem, 1.75rem + 3.75vw, 4rem);       /* 40px → 64px (section titles) */
-
-	--text-hero: clamp(5rem, 3.5rem + 7.5vw, 8rem);       /* 80px → 128px (hero title - ANA PÉREZ) */
-
-	/*
-	 * FLUID SPACING SCALE
-	 *
-	 * Consistent spacing creates visual rhythm. These values scale
-	 * proportionally with the viewport, maintaining relationships.
-	 *
-	 * Use these for margins, paddings, and gaps — NOT for widths!
-	 */
-	--space-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);     /* 4px → 8px */
-	--space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);      /* 8px → 12px */
-	--space-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);           /* 16px → 24px */
-	--space-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);       /* 24px → 40px */
-	--space-xl: clamp(2rem, 1.5rem + 2.5vw, 4rem);           /* 32px → 64px */
-	--space-2xl: clamp(3rem, 2rem + 5vw, 6rem);              /* 48px → 96px (section padding) */
-
-	/*
-	 * COLOR PALETTE
-	 *
-	 * Dark theme with indigo accent. Limited palette = cohesive design.
-	 * Semantic naming (bg, text, accent) makes colors self-documenting.
-	 */
-	--color-bg: #0f0f0f;              /* Near-black background */
-	--color-bg-alt: #1a1a1a;          /* Slightly lighter for depth/sections */
-	--color-text: #f5f5f5;            /* Off-white for readability (not pure white) */
-	--color-text-muted: #a0a0a0;      /* Subdued text for secondary content */
-	--color-accent: #6366f1;          /* Indigo — primary brand color */
-	--color-accent-hover: #818cf8;    /* Lighter indigo for hover states */
-
-	/*
-	 * ANIMATION TOKENS
-	 *
-	 * Centralizing animation values ensures consistency and makes
-	 * global timing adjustments trivial.
-	 *
-	 * The custom easing curve creates a "gentle landing" effect:
-	 * - Fast start (0.22, 1)
-	 * - Smooth deceleration (0.36, 1)
-	 */
-	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);  /* "Power2.out" equivalent */
-	--duration-normal: 0.6s;                      /* Default animation duration */
-}
-
-/* --------------------------------------------------------------------------
-   Typography - BBH Sans Bartle (CENTRALIZADO)
-   -------------------------------------------------------------------------- */
-@font-face {
-    font-family: "BBH Sans Bartle";
-    src: url('../fonts/BBHSansBartle-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: "BBH Sans Bartle", sans-serif !important;
-    font-weight: 400 !important;
-}
-
-/* Responsive default sizes for Bartle headings */
-h1 { font-size: clamp(2rem, 7vw, 4rem); line-height: 0.95; }
-h2 { font-size: clamp(1.8rem, 6vw, 3rem); line-height: 0.95; }
-h3 { font-size: clamp(1.5rem, 4.8vw, 2.2rem); line-height: 1.05; }
-h4 { font-size: clamp(1.3rem, 3.6vw, 1.8rem); line-height: 1.1; }
-h5 { font-size: clamp(1.1rem, 2.8vw, 1.4rem); line-height: 1.15; }
-h6 { font-size: clamp(1rem, 2.4vw, 1.2rem); line-height: 1.2; }
-
-/* Excepción para el título de Projects Hero */
-h1.title-projects-hero {
-    font-family: "BBH Sans Bartle", sans-serif !important;
-    font-weight: 900 !important;
-}
-
-/* Excepción para el título del Hero (ANA PEREZ) */
-h1.hero-title {
-	font-family: "BBH Sans Bartle", sans-serif !important;
-	font-weight: 900 !important;
-}
-
-.section-title {
-    font-family: "BBH Sans Bartle", sans-serif !important;
-    font-weight: 400 !important;
-}
-
-/* Título específico para Projects Hero - ACTUALIZADO */
+/* Projects Hero title */
 .title-projects-hero {
 	position: absolute !important;
 	top: 75% !important;
@@ -192,7 +109,7 @@ h1.hero-title {
 	pointer-events: none;
 }
 
-/* Estilo equivalente para el título del Hero */
+/* Hero title (ANA PEREZ) */
 .hero-title {
 	font-size: clamp(3.6rem, 14vw, 10.5rem) !important;
 	color: #ffffff !important;
@@ -208,7 +125,7 @@ h1.hero-title {
 	z-index: 2 !important;
 }
 
-/* Párrafo del Hero, alineado a la derecha y encima del título */
+/* Hero description */
 .hero-description {
 	position: absolute !important;
 	right: var(--space-lg) !important;
@@ -221,6 +138,7 @@ h1.hero-title {
 	z-index: 2 !important;
 }
 
+/* Responsive adjustments */
 @media (max-width: 1024px) {
 	.title-projects-hero {
 		font-size: clamp(3rem, 12vw, 8rem) !important;
@@ -237,7 +155,7 @@ h1.hero-title {
 		right: auto !important;
 		left: 50% !important;
 		transform: translateX(-50%) !important;
-		bottom: clamp(7rem, 16vw, 14rem) !important;
+		bottom: clamp(12rem, 20vw, 15rem) !important;
 		gap: var(--space-sm) !important;
 		align-items: center !important;
 	}
@@ -266,23 +184,31 @@ h1.hero-title {
 		right: var(--space-md) !important;
 		bottom: clamp(3rem, 12vw, 7rem) !important;
 		max-width: 80vw !important;
-		font-size: clamp(0.85rem, 3.2vw, 1rem) !important;
+		font-size: clamp(0.85rem, 2.6vw, 0.95rem) !important;
 	}
 	.hero-text-group {
-		right: auto !important;
-		left: 50% !important;
-		transform: translateX(-50%) !important;
-		bottom: clamp(10rem, 30vw, 18rem) !important;
-		gap: var(--space-sm) !important;
-		align-items: center !important;
+		bottom: clamp(16rem, 25vw, 19rem) !important;
 	}
 	.hero-text-group .hero-description {
 		max-width: 85vw !important;
-		font-size: clamp(0.75rem, 3.2vw, 0.95rem) !important;
-		text-align: center !important;
-	}
-	.hero-text-group .hero-cta {
-		align-self: center !important;
 	}
 }
 
+@media (max-width: 500px) {
+	.title-projects-hero {
+		font-size: clamp(1.8rem, 16vw, 4rem) !important;
+		line-height: 0.8 !important;
+	}
+	.hero-title {
+		font-size: clamp(2rem, 15vw, 4rem) !important;
+		line-height: 0.8 !important;
+	}
+	.hero-description {
+		bottom: clamp(2.5rem, 14vw, 6rem) !important;
+		max-width: 90vw !important;
+		font-size: clamp(0.8rem, 3vw, 0.9rem) !important;
+	}
+	.hero-text-group {
+		bottom: clamp(17rem, 30vw, 21rem) !important;
+	}
+}
