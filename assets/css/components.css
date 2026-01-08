@@ -22,13 +22,12 @@
    -------------------------------------------------------------------------- */
 .services {
 	background: var(--color-bg-alt);
-	padding: var(--space-2xl) 0;
+	padding: 160px 96px;
 }
 
 .services-container {
-	max-width: 1200px;
+	max-width: 1280px;
 	margin: 0 auto;
-	padding: 0 var(--space-lg);
 }
 
 /* New Contact Section (Split: left info, right form) */
@@ -78,16 +77,38 @@
 	color: #777;
 }
 
-.contact-socials .icons {
-	margin-top: 12px;
+.follow-me {
 	display: flex;
 	gap: 16px;
+	margin-top: 12px;
 }
 
-.contact-socials a {
+.follow-me a {
+	font-size: 0.9rem;
+	font-weight: 600;
 	text-decoration: none;
-	color: #111;
-	font-weight: 500;
+	color: #01fb3b;
+	opacity: 0.95;
+	transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border-radius: 999px;
+	border: 1px solid #01fb3b;
+	background: #000000;
+	box-shadow: 0 10px 24px rgba(1, 251, 59, 0.22);
+	cursor: pointer;
+}
+
+.follow-me a:hover {
+	opacity: 1;
+	transform: translateY(-2px);
+	color: #000000;
+	background: #01fb3b;
+	border-color: #01fb3b;
+	box-shadow: 0 12px 26px rgba(1, 251, 59, 0.3);
 }
 
 /* FORM */
@@ -120,13 +141,35 @@
 	border-radius: 4px; /* Match CTA corner radius */
 	padding: 14px 20px;
 	font-size: 0.95rem;
+	font-family: inherit;
 	outline: none;
+	background: rgba(255, 255, 255, 0.35);
+	border: 1px solid rgba(255, 255, 255, 0.55);
+	box-shadow: 0 18px 38px rgba(0, 0, 0, 0.12);
+	backdrop-filter: blur(12px) saturate(130%);
+	-webkit-backdrop-filter: blur(12px) saturate(130%);
+	color: #000000;
 }
 
 .form-group textarea {
 	border-radius: 4px; /* Match CTA corner radius */
 	min-height: 160px;
 	resize: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+	color: rgba(0, 0, 0, 0.55);
+	font-family: inherit;
+	font-size: 0.95rem;
+}
+
+/* Contact labels and headings in black & bold */
+.contact-item span,
+.contact-socials span,
+.form-group label {
+	color: #000000;
+	font-weight: 700;
 }
 
 .contact-form button {
@@ -166,7 +209,7 @@
 
 .services-header {
 	margin-bottom: var(--space-2xl);
-	text-align: right;
+	text-align: left;
 }
 
 .services-label {
@@ -184,6 +227,7 @@
 	color: #ffffff;
 	margin: 0;
 	line-height: 0.9;
+	max-width: 12ch;
 }
 
 .services-accordion {
@@ -394,6 +438,125 @@
 .about-button:hover {
 	background-color: #ffffff;
 	color: #01fb3b;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+	.about-split {
+		grid-template-columns: 1fr;
+	}
+
+	.about-image {
+		height: 40vh;
+	}
+
+	.about-panel {
+		padding: 48px 32px;
+	}
+}
+
+/* --------------------------------------------------------------------------
+   10. Footer (Editorial Layout)
+   -------------------------------------------------------------------------- */
+.editorial-footer {
+	background-color: #000;
+	color: #fff;
+	padding: 160px 96px;
+}
+
+.footer-top h2 {
+	font-size: clamp(3rem, 6vw, 6rem);
+	font-weight: 700;
+	line-height: 1;
+	margin-bottom: 80px;
+	font-family: "BBH Sans Bartle", sans-serif;
+	max-width: 1280px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.footer-bottom {
+	display: grid;
+	grid-template-columns: 1fr auto auto;
+	align-items: start;
+	gap: 48px;
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
+.footer-info p {
+	font-size: 0.95rem;
+	margin-bottom: 4px;
+}
+
+.footer-info span {
+	font-size: 0.95rem;
+	opacity: 0.6;
+}
+
+.footer-links {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	align-self: start;
+	margin-top: -270px;
+}
+
+.footer-social {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	align-self: start;
+	margin-top: -270px;
+}
+
+.footer-links a {
+	text-decoration: none;
+	color: #fff;
+	font-size: 0.95rem;
+	opacity: 0.7;
+	transition: opacity 0.3s ease;
+}
+
+.footer-links a:hover {
+	opacity: 1;
+}
+
+.footer-social a {
+	text-decoration: none;
+	color: #000;
+	font-size: 0.95rem;
+	font-weight: 600;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	border-radius: 999px;
+	background: #01fb3b;
+	border: 1px solid #01fb3b;
+	transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+	background: #000;
+	color: #01fb3b;
+	border-color: #01fb3b;
+}
+
+@media (max-width: 900px) {
+	.editorial-footer {
+		padding: 60px 32px;
+	}
+
+	.footer-bottom {
+		grid-template-columns: 1fr;
+		gap: 32px;
+	}
+
+	.footer-top h2 {
+		margin-bottom: 48px;
+	}
 }
 
 /* RESPONSIVE */
@@ -921,32 +1084,76 @@
    10. Footer
    -------------------------------------------------------------------------- */
 .footer {
-	padding: var(--space-lg) 0;
-	text-align: center;
-	color: var(--color-text-muted);
-	font-size: var(--text-sm);
+	background-color: #000;
+	padding: 40px 80px;
+	color: #fff;
 }
 
-.footer .container {
+.footer-container {
+	max-width: 1200px;
+	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
+	gap: 24px;
 }
 
-.back-to-top {
-	width: 40px;
-	height: 40px;
+/* LEFT */
+.footer-left {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: var(--color-bg-alt);
-	border-radius: 50%;
-	transition: background 0.3s, transform 0.3s;
+	flex-direction: column;
+	align-items: flex-start;
+	text-align: left;
 }
 
-.back-to-top:hover {
-	background: var(--color-accent);
-	transform: translateY(-3px);
+.footer-left p {
+	font-size: 0.85rem;
+	margin-bottom: 4px;
+}
+
+.footer-left span {
+	font-size: clamp(2rem, 8vw, 4rem); /* Match About Me heading scale */
+	line-height: 0.9;
+	font-weight: 900;
+	font-family: "BBH Sans Bartle", sans-serif;
+	color: #ffffff;
+	display: block;
+	max-width: 14ch; /* Force wrap into two lines similar to About title */
+}
+
+/* RIGHT */
+.footer-right {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+}
+
+.footer-right a {
+	font-size: 0.8rem;
+	text-decoration: none;
+	color: #fff;
+	opacity: 0.7;
+	transition: opacity 0.3s ease;
+}
+
+.footer-right a:hover {
+	opacity: 1;
+}
+
+@media (max-width: 768px) {
+	.footer {
+		padding: 32px;
+	}
+
+	.footer-container {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.footer-right {
+		gap: 16px;
+	}
 }
 
 /* --------------------------------------------------------------------------

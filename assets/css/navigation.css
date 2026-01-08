@@ -38,8 +38,10 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: min(90%, 1200px);
-	margin-inline: auto;
+	max-width: calc(1280px + 192px);
+	margin: 0 auto;
+	padding: 0 96px;
+	width: 100%;
 }
 
 /* Mobile toggle button (glass + minimal plus) */
