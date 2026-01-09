@@ -12,7 +12,7 @@ Este proyecto es un portafolio creativo personal desarrollado para mostrar mis t
 - Grid responsivo para la galería de proyectos.
 - Animaciones CSS para transiciones suaves y efectos visuales.
 - Hover effects y overlays interactivos en las imágenes.
-- HTML5 y CSS3 para la estructura y el diseño visual.
+- HTML5 (independizado del HTML para diseño web) y CSS3 para la estructura y el diseño visual.
 - JavaScript para la interactividad.
 - Diseño responsive (adaptativo) para diferentes dispositivos, aunque reconozco que aún podría mejorarse para lograr una experiencia perfecta en todos los tamaños de pantalla.
 
@@ -24,4 +24,7 @@ Me encanta tener mis trabajos en formato web porque es una forma muy útil y acc
 
 ### Mejoras Futuras
 Aunque he trabajado mucho en el diseño responsive, creo que todavía se puede perfeccionar para que la experiencia sea completamente fluida en todos los dispositivos. Es un aspecto que seguiré mejorando en futuras versiones.
+
+
+
 
