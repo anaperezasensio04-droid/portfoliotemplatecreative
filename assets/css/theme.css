@@ -1,3 +1,19 @@
+.hero-description {
+	animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+.hero-cta {
+	animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 /* Design Tokens & Variables - Fluid Typography System */
 :root {
 	/* Colors */
@@ -92,6 +108,7 @@ h1.hero-title {
 	align-items: center !important;
 	gap: var(--space-md) !important;
 	z-index: 3 !important;
+	padding-top: 1.5rem;
 }
 
 .hero-text-group .hero-description {
@@ -200,16 +217,28 @@ h1.hero-title {
 		line-height: 0.85 !important;
 	}
 	.hero-description {
-		right: var(--space-md) !important;
-		bottom: clamp(3rem, 12vw, 7rem) !important;
-		max-width: 80vw !important;
+		position: static !important;
+		right: auto !important;
+		left: auto !important;
+		bottom: auto !important;
+		max-width: 90vw !important;
 		font-size: clamp(0.85rem, 2.6vw, 0.95rem) !important;
+		color: #cdcdcd !important;
+		text-align: center !important;
+		margin-bottom: 1.2rem;
 	}
 	.hero-text-group {
-		bottom: clamp(16rem, 25vw, 19rem) !important;
+		position: static !important;
+		left: auto !important;
+		transform: none !important;
+		bottom: auto !important;
+		align-items: center !important;
+		padding-top: 0;
+		margin-top: 2.5rem;
+		width: 100%;
 	}
 	.hero-text-group .hero-description {
-		max-width: 85vw !important;
+		max-width: 90vw !important;
 	}
 }
 

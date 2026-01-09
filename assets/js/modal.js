@@ -5,7 +5,7 @@
 // Project data
 const projects = {
 	'img-a': {
-		title: 'Olympics Poster Design',
+		title: 'Olympic brand redisign',
 		category: 'Motion Design / Branding',
 		media: {
 			type: 'video',
@@ -15,7 +15,7 @@ const projects = {
 		tags: ['Motion Design', 'Branding', 'Typography', 'After Effects']
 	},
 	'img-b': {
-		title: 'Tote Bag Design',
+		title: 'merch design ',
 		category: 'Product Design / Illustration',
 		media: {
 			type: 'image',
@@ -25,14 +25,14 @@ const projects = {
 		tags: ['Illustration', 'Product Design', 'Print Design']
 	},
 	'img-c': {
-		title: 'Rosalía Album Concept',
+		title: 'lux album inphhography',
 		category: 'Album Art / Visual Identity',
 		media: {
 			type: 'image',
 			src: 'https://ik.imagekit.io/cohwnscdit/Captura%20de%20pantalla%202026-01-05%20112336.png'
 		},
-		description: 'Visual identity concept for a music album, exploring themes of cultural heritage and contemporary aesthetics through expressive illustration and typography.',
-		tags: ['Album Art', 'Visual Identity', 'Illustration', 'Photoshop']
+		description: 'Visual data concept for Rosalía music album, exploring the languages across the album and themes of cultural heritage and contemporary aesthetics through expressive illustration and typography.',
+		tags: ['Album Art', 'Visual Data', 'Illustration', 'Photoshop']
 	},
 	'img-e': {
 		title: 'Youth Culture Editorial',
@@ -45,7 +45,7 @@ const projects = {
 		tags: ['Photography', 'Editorial', 'Art Direction']
 	},
 	'img-f': {
-		title: 'Alternative Media',
+		title: 'promo video',
 		category: 'Motion Graphics / Digital Art',
 		media: {
 			type: 'video',
@@ -75,7 +75,7 @@ const projects = {
 		tags: ['Printmaking', 'Traditional Art', 'Texture', 'Handcraft']
 	},
 	'img-k': {
-		title: 'Graphic Compositions',
+		title: 'digital art',
 		category: 'Graphic Design / Illustration',
 		media: {
 			type: 'image',

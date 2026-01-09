@@ -90,6 +90,8 @@
 .nav-logo {
 	font-size: clamp(1.1rem, 3vw, 1.6rem);
 	font-weight: 700;
+	margin-right: auto;
+	padding-left: 0;
 }
 
 /* Desktop: Show links by default */
