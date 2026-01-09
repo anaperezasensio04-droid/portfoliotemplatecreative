@@ -1,31 +1,36 @@
-/* Layout Components */
+/* Layout Components - Mobile First */
 
 .container {
-	width: min(90%, 1200px);
-	margin-inline: auto;
+    width: min(90%, 1200px);
+    margin-inline: auto;
+    padding: 0 clamp(16px, 5vw, 48px);
 }
 
 .section {
-	padding: var(--space-2xl) 0;
+    padding: clamp(1.5rem, 5vw, 3rem) 0;
+    width: 100%;
 }
 
 .section-title {
 	font-family: "BBH Sans Bartle", sans-serif !important;
 	font-weight: 400 !important;
-	font-size: clamp(1.8rem, 6vw, 3.2rem);
+	font-size: var(--heading-2);
 	margin-bottom: var(--space-xl);
 	text-align: left;
 }
 
+/* Center titles in specific sections */
 .projects .section-title,
 .contact .section-title {
 	text-align: center !important;
 }
 
+/* Align all headings left by default */
 h1, h2, h3, h4, h5, h6 {
 	text-align: left !important;
 }
 
+/* Exception for Projects Hero */
 h1.title-projects-hero {
 	text-align: center !important;
 }

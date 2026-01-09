@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
-   Modal System for Projects
+   Modal System for Projects - Mobile First
    -------------------------------------------------------------------------- */
 
 .modal-overlay {
@@ -14,6 +14,7 @@
 	justify-content: center;
 	opacity: 0;
 	transition: opacity 0.3s ease;
+	padding: clamp(16px, 4vw, 24px);
 }
 
 .modal-overlay.active {
@@ -21,16 +22,17 @@
 	opacity: 1;
 }
 
+/* Mobile: Full-screen modal by default */
 .modal-content {
 	position: relative;
 	background: #0a0a0a;
 	border: 1px solid rgba(1, 251, 59, 0.2);
 	border-radius: 8px;
-	max-width: 90vw;
-	max-height: 85vh;
-	width: 1000px;
+	max-width: 100%;
+	max-height: 90vh;
+	width: 100%;
 	overflow-y: auto;
-	padding: clamp(24px, 5vw, 48px);
+	padding: clamp(20px, 5vw, 32px);
 	transform: scale(0.9) translateY(20px);
 	transition: transform 0.3s ease;
 }
@@ -43,8 +45,8 @@
 	position: absolute;
 	top: clamp(12px, 3vw, 20px);
 	right: clamp(12px, 3vw, 20px);
-	width: 40px;
-	height: 40px;
+	width: 44px;
+	height: 44px;
 	background: transparent;
 	border: 2px solid #01fb3b;
 	border-radius: 50%;
@@ -56,6 +58,8 @@
 	justify-content: center;
 	transition: all 0.3s ease;
 	z-index: 10;
+	min-height: 44px;
+	min-width: 44px;
 }
 
 .modal-close:hover {
@@ -64,24 +68,29 @@
 	transform: rotate(90deg);
 }
 
+.modal-close:active {
+	transform: rotate(90deg) scale(0.95);
+}
+
 .modal-header h3 {
-	font-size: clamp(1.8rem, 5vw, 3rem);
+	font-size: clamp(1.5rem, 6vw, 2.5rem);
 	color: #01fb3b;
 	margin-bottom: 8px;
 	font-family: "BBH Sans Bartle", sans-serif;
 	font-weight: 900;
+	word-break: break-word;
 }
 
 .modal-category {
-	font-size: clamp(0.85rem, 2vw, 1rem);
+	font-size: clamp(0.8rem, 2vw, 0.9rem);
 	color: rgba(255, 255, 255, 0.6);
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
-	margin-bottom: 24px;
+	margin-bottom: var(--space-lg);
 }
 
 .modal-media {
-	margin: 32px 0;
+	margin: clamp(16px, 4vw, 24px) 0;
 	border-radius: 4px;
 	overflow: hidden;
 }
@@ -96,15 +105,15 @@
 .modal-description {
 	color: rgba(255, 255, 255, 0.85);
 	line-height: 1.7;
-	font-size: clamp(0.95rem, 2vw, 1.05rem);
-	margin-bottom: 24px;
+	font-size: clamp(0.9rem, 2vw, 1rem);
+	margin-bottom: var(--space-lg);
 }
 
 .modal-tags {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 12px;
-	margin-top: 32px;
+	margin-top: var(--space-xl);
 }
 
 .modal-tag {
@@ -112,7 +121,7 @@
 	background: transparent;
 	border: 1px solid #01fb3b;
 	color: #01fb3b;
-	font-size: 0.85rem;
+	font-size: clamp(0.75rem, 1.8vw, 0.85rem);
 	border-radius: 4px;
 	font-weight: 600;
 	letter-spacing: 0.05em;
@@ -128,12 +137,25 @@
 	filter: brightness(1.1);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Tablet: Constrain modal width */
+@media (min-width: var(--bp-md)) {
 	.modal-content {
-		max-width: 95vw;
-		max-height: 90vh;
-		padding: clamp(20px, 4vw, 32px);
+		width: 95vw;
+		max-width: 800px;
+		padding: clamp(24px, 4vw, 40px);
+	}
+}
+
+/* Desktop: Full-featured modal */
+@media (min-width: var(--bp-lg)) {
+	.modal-content {
+		width: 1000px;
+		max-width: 90vw;
+		padding: clamp(24px, 5vw, 48px);
+	}
+	
+	.modal-header h3 {
+		font-size: clamp(1.8rem, 5vw, 3rem);
 	}
 }
 
