@@ -130,9 +130,52 @@ function initServicesAccordion() {
 }
 
 // Initialize all on DOM ready
+// Highlight nav link based on scroll position
+function initActiveNavLink() {
+	const sections = [
+		{ id: 'hero', nav: 'hero' },
+		{ id: 'about', nav: 'about' },
+		{ id: 'projects', nav: 'projects' },
+		{ id: 'services', nav: 'services' },
+		{ id: 'contact', nav: 'contact' }
+	];
+	const navLinks = document.querySelectorAll('.nav-links a');
+
+	// Eliminar clase active al hacer clic (solo scroll la controla)
+	navLinks.forEach(link => {
+		link.addEventListener('click', function() {
+			navLinks.forEach(l => l.classList.remove('active'));
+		});
+	});
+
+	function onScroll() {
+		let current = '';
+		const scrollY = window.pageYOffset;
+		sections.forEach(section => {
+			const el = document.getElementById(section.id);
+			if (el) {
+				const sectionTop = el.offsetTop - 120;
+				if (scrollY >= sectionTop) {
+					current = section.nav;
+				}
+			}
+		});
+		navLinks.forEach(link => {
+			link.classList.remove('active');
+			const href = link.getAttribute('href');
+			if (href === `#${current}`) {
+				link.classList.add('active');
+			}
+		});
+	}
+	window.addEventListener('scroll', onScroll);
+	onScroll();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 	initScrollAnimations();
 	initSmoothScroll();
 	initMobileNav();
 	initServicesAccordion();
+	initActiveNavLink();
 });

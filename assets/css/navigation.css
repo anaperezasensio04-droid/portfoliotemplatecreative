@@ -1,4 +1,4 @@
-/* Navigation */
+/* Estilos visuales para la barra de navegación principal */
 
 .nav {
 	position: fixed;
@@ -40,7 +40,7 @@
 	width: 100%;
 }
 
-/* Mobile: Show nav toggle by default */
+/* Toggle de navegación visible en móvil */
 .nav-toggle {
 	display: none;
 	align-items: center;
@@ -92,9 +92,26 @@
 	font-weight: 700;
 	margin-right: auto;
 	padding-left: 0;
+	margin-left: 16px;
 }
 
-/* Desktop: Show links by default */
+@media (min-width: 1024px) {
+	.nav-container {
+		padding-left: 0 !important;
+		padding-right: clamp(16px, 5vw, 96px);
+		margin-left: 0 !important;
+	}
+		       .nav-logo {
+			       margin-left: 50px;
+			       padding-left: 0 !important;
+		       }
+				       .nav-links {
+					       margin-left: 200px !important;
+				       }
+}
+
+
+/* Enlaces de navegación visibles en escritorio */
 .nav-links {
 	display: flex;
 	flex-direction: row;

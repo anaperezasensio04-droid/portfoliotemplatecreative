@@ -15,7 +15,12 @@
 	}
 }
 /* Design Tokens & Variables - Fluid Typography System */
+/* Variables globales de color, tipografía, espaciado y breakpoints */
 :root {
+	/*
+		Variables globales de color, tipografía, espaciado y breakpoints.
+		Usar estas variables para mantener consistencia visual en todo el sitio.
+	*/
 	/* Colors */
 	--color-bg: #0f0f0f;
 	--color-bg-alt: #1a1a1a;
@@ -63,6 +68,7 @@
 
 /* BBH Sans Bartle Font */
 @font-face {
+/* Fuente personalizada principal */
     font-family: "BBH Sans Bartle";
     src: url('../fonts/BBHSansBartle-Regular.woff2') format('woff2');
     font-weight: 400;
@@ -73,6 +79,7 @@
 /* Typography - Heading Scale */
 h1, h2, h3, h4, h5, h6 {
     font-family: "BBH Sans Bartle", sans-serif !important;
+/* Escala tipográfica para headings */
     font-weight: 400 !important;
     line-height: 1.1;
 }
@@ -93,6 +100,7 @@ h1.hero-title {
 
 .section-title {
     font-family: "BBH Sans Bartle", sans-serif !important;
+/* Título de sección destacado */
     font-weight: 400 !important;
     font-size: var(--heading-2);
 }

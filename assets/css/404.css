@@ -1,6 +1,36 @@
-/* --------------------------------------------------------------------------
-   404 Page Styles
-   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+	.zero-wrapper {
+		font-size: clamp(2.2rem, 10vw, 5.5rem);
+		gap: 6px;
+		flex-direction: column;
+		align-items: center;
+	}
+	.error-container {
+		padding-inline: clamp(8px, 4vw, 32px);
+	}
+	.subtitle {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		max-width: 96vw;
+		margin: 18px auto 0 auto;
+		padding: 0 24px;
+		text-align: center;
+		box-sizing: border-box;
+		word-break: break-word;
+	}
+	.subtitle p {
+		margin: 10px 0;
+	}
+	.back-link {
+		width: 100%;
+		max-width: 260px;
+		font-size: 0.85rem;
+		padding: 10px 24px;
+		margin-top: 20px;
+		box-sizing: border-box;
+	}
+}
+/* Estilos para la página de error 404 */
 @font-face {
 	font-family: "BBH Sans Bartle";
 	src: url('../fonts/BBHSansBartle-Regular.woff2') format('woff2');
@@ -155,15 +185,9 @@ body::before {
 .back-link:hover {
 	background: #01fb3b;
 	color: #000;
-	box-shadow: 0 0 30px rgba(1, 251, 59, 0.6), inset 0 0 10px rgba(1, 251, 59, 0.2);
+	box-shadow: 0 0 30px #01fb3b, inset 0 0 10px #01fb3b;
 	transform: translateY(-2px) scale(1.05);
-}
-
-/* Responsive tweaks */
-@media (max-width: 640px) {
-	.zero-wrapper { gap: 8px; }
-	.subtitle { font-size: clamp(0.95rem, 3vw, 1.1rem); }
-	.back-link { padding: 10px 24px; font-size: 0.85rem; }
+	opacity: 1;
 }
 
 @media (max-width: 400px) {

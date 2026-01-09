@@ -20,7 +20,7 @@ Este proyecto es un portafolio creativo personal desarrollado para mostrar mis t
 En el desarrollo de este portafolio he utilizado herramientas de IA para optimizar el código, generar ideas y acelerar la resolución de problemas técnicos, lo que me ha permitido centrarme más en la creatividad y la experiencia visual.
 
 ### Reflexión Personal
-Me encanta tener mis trabajos en formato web porque es una forma muy útil y accesible de compartir mi portafolio con el mundo. Además, la web me permite experimentar con la presentación y la interacción de mis proyectos de una manera dinámica y profesional.
+Me encanta tener mis trabajos en formato web porque es una forma muy útil y accesible de compartir mi portafolio con el mundo. Además, la web me permite experimentar con la presentación y la interacción de mis proyectos de una manera dinámica y profesional, metiendo al usuario en mi mundo crativo viendo mis proyectos.Estoy muy orgullosa de la evolución de mi proyecto y el cuidado que he puesto en hacerlo implementando detalles mínimos como el favicon, que creo que hacen la diferencia, aunque aún queden muchas cosas por mejorar.
 
 ### Mejoras Futuras
 Aunque he trabajado mucho en el diseño responsive, creo que todavía se puede perfeccionar para que la experiencia sea completamente fluida en todos los dispositivos. Es un aspecto que seguiré mejorando en futuras versiones.
